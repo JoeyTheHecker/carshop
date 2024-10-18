@@ -9,6 +9,7 @@ use App\Models\BrandCar;
 use App\Models\Categories;
 use App\Models\Groups;
 use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -31,7 +32,7 @@ class ProductController extends Controller
         $categoriesQuery = $categories
         ->where('status', '=', (int)$categories::STATUS_ACTIVE)
         ->get();
-  
+
         return view('products.index')
         ->with('data', $data)
         ->with('groups', $groupsQuery)
@@ -39,10 +40,10 @@ class ProductController extends Controller
     }
 
     public function productAjaxSummary(Request $request)
-    {   
+    {
         // Initialize the query from the Products model
         $query = Products::query();
-    
+
         // Check if 'is_display_on' is present in the request and apply the filters
         if ($request->filled('is_display_on')) {
             switch ($request->input('is_display_on')) {
@@ -57,47 +58,47 @@ class ProductController extends Controller
                     break;
             }
         }
-    
+
         // Filter by group_id if provided
         if ($request->filled('group_id')) {
             $query->where('group_id', $request->input('group_id'));
         }
-    
+
         // Filter by category_id if provided
         if ($request->filled('category_id')) {
             $query->where('category_id', $request->input('category_id'));
         }
-    
+
         // Filter by region_name with a LIKE query
         if ($request->filled('region_name')) {
             $query->where('region_name', 'LIKE', '%' . $request->input('region_name') . '%');
         }
-    
+
         // Filter by location_name with a LIKE query
         if ($request->filled('location_name')) {
             $query->where('location_name', 'LIKE', '%' . $request->input('location_name') . '%');
         }
-    
+
         // Filter by product_name with a LIKE query
         if ($request->filled('product_name')) {
             $query->where('product_name', 'LIKE', '%' . $request->input('product_name') . '%');
         }
-    
+
         // Filter by brand_name with a LIKE query
         if ($request->filled('brand_name')) {
             $query->where('brand_name', 'LIKE', '%' . $request->input('brand_name') . '%');
         }
-    
+
         // Filter by puo_number with a LIKE query
         if ($request->filled('puo_number')) {
             $query->where('puo_number', 'LIKE', '%' . $request->input('puo_number') . '%');
         }
-    
+
         // Filter by min_bid_price
         if ($request->filled('min_bid_price')) {
             $query->where('min_bid_price', (float) $request->input('min_bid_price'));
         }
-    
+
         // Handle 'type' filtering with specific logic
         if ($request->filled('type')) {
             if ($request->input('type') == 0) {
@@ -106,7 +107,7 @@ class ProductController extends Controller
                 $query->where('status', $request->input('type'));
             }
         }
-    
+
         // Retrieve paginated data with sorting
         $data = $query->orderBy('updated_at', 'DESC')->paginate(20);
 
@@ -116,7 +117,7 @@ class ProductController extends Controller
             'data' => $data,
         ]);
     }
-    
+
 
     public function create()
     {
@@ -139,8 +140,8 @@ class ProductController extends Controller
         ->with('categories', $categoriesQuery);
     }
 
-    public function store(Request $request) 
-    {   
+    public function store(Request $request)
+    {
 
         $regex = "/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/";
 
@@ -195,12 +196,10 @@ class ProductController extends Controller
 
         if($request->featured_image){
             $file = $request->featured_image;
-            $imageName = $products->generateUniqueID() . '.' . 
-            $file->getClientOriginalExtension();
+            $imageName = $products->generateUniqueID() . '.' . $file->getClientOriginalExtension();
 
-            $ext = $file->getClientOriginalExtension();
-
-            Storage::disk('s3')->put($imageName, file_get_contents($file));
+             // Save the file to the 'public/car_images' folder
+            Storage::disk('public')->put('car_images/' . $imageName, file_get_contents($file));
         }
 
         $products->product_code = 0;
@@ -222,7 +221,7 @@ class ProductController extends Controller
         $products->plate_number = (string)$request->plate_number;
         $products->mileage = (string)$request->mileage;
         $products->transmission = (string)$request->transmission;
-        $products->fuel_type = (string)$request->fuel_type; 
+        $products->fuel_type = (string)$request->fuel_type;
         $products->inventory_price = (float)$request->inventory_price;
         $products->selling_price = (float)$request->selling_price;
         $products->market_value = (float)$request->market_value;

@@ -7,9 +7,9 @@
 @else
     {{-- <div class="grid grid-cols-2 gap-4 col-span-2"> --}}
         @foreach ($data as $r)
-            <a href="vehicledetails.html"
+            <a href="{{ route('details', $r->id) }}"
             class="bg-gray-300 p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-            <img src="{{ asset('images/samplevehicle.jpg') }}" alt="Vehicle 1" class="w-full h-72 object-cover rounded-t-lg">
+            <img src="{{ asset('storage/car_images/' . $r->image) }}" alt="{{ $r->image }}" class="w-full h-72 object-cover rounded-t-lg">
             <div class="mt-2">
                 <h2 class="text-2xl font-bold">{{ $r->product_name }}</h2>
                 <p class="text-gray-600 font-semibold">PHP {{ $r->clearSellingPrice() }}</p>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,3 +36,4 @@ Route::get('/product/create', [App\Http\Controllers\Admin\ProductController::cla
 Route::post('/product/store', [App\Http\Controllers\Admin\ProductController::class, 'store']);
 
 Route::get('/product/search', [App\Http\Controllers\ProductController::class, 'search']);
+Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::class, 'details'])->name('details');
