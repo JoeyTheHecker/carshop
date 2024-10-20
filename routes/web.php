@@ -35,5 +35,8 @@ Route::get('/product/summary/deleted', [App\Http\Controllers\Admin\ProductContro
 Route::get('/product/create', [App\Http\Controllers\Admin\ProductController::class, 'create']);
 Route::post('/product/store', [App\Http\Controllers\Admin\ProductController::class, 'store']);
 
+Route::get('/product/gallery/{id}', [App\Http\Controllers\ProductGalleryController::class, 'galleryPost']);
+Route::post('/product/gallery/{id}', [App\Http\Controllers\ProductGalleryController::class, 'galleryPostNew']);
+
 Route::get('/product/search', [App\Http\Controllers\ProductController::class, 'search']);
 Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::class, 'details'])->name('details');

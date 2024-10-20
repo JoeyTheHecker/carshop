@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,6 +19,10 @@ class ProductController extends Controller
     {
         $data = Products::FindOrFail($id);
 
-        return view('details',compact('data'));
+        /* gallery */
+        $gallery = new ProductGallery();
+
+        $product_gallery = $gallery->where('product_id', '=', (int)$id)->get();
+        return view('details',compact('data'))->with('product_gallery', $product_gallery);;
     }
 }
