@@ -33,7 +33,7 @@
         </div><!-- logopanel -->
         <div class="leftpanelinner">
             <!-- This is only visible to small devices -->
-            <div class="visible-xs hidden-sm hidden-md hidden-lg">   
+            <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
                     <div class="media-body"><h4>{{ Auth::user()->name }}</h4></div>
                 </div>
@@ -59,7 +59,7 @@
                 {{-- <li><a href="{{ url('/pricelists') }}"><i class="fa fa-download"></i> Price Lists</a></li>
                 <li><a href="{{ url('/inquiry') }}"><i class="fa fa-pencil"></i> Inquiry</a></li>
                 <li><a href="{{ url('/subscribers') }}"><i class="fa fa-folder"></i> Subscribers</a></li>
-                
+
                 <li class="nav-parent"><a href="#"><i class="fa fa-truck"></i>Bidder Accounts</a>
                     <ul class="children" style="display: block;">
                         <li><a href="{{ url('/bidder-accounts#tab1') }}" data-hash="isActive">- Pending</a></li>
@@ -67,8 +67,8 @@
                     </ul>
                 </li>
                 <li><a href="{{ url('/intent') }}"><i class="fa fa-book"></i> Bidder Lists</a></li>
-                <li><a href="{{ url('/web/bidding') }}"><i class="fa fa-book"></i> Bidding Lists</a></li>
-                <li><a href="{{ url('/loi') }}"><i class="fa fa-folder-open-o"></i> LOI Lists</a></li> --}}
+                <li><a href="{{ url('/web/bidding') }}"><i class="fa fa-book"></i> Bidding Lists</a></li> --}}
+                <li><a href="{{ url('/loi') }}"><i class="fa fa-folder-open-o"></i> LOI Lists</a></li>
                 <!-- @if(Auth::user()->role_id == 0)
                     <li><a href="{{ url('/user') }}"><i class="fa fa-group"></i> User Management</a></li>
                 @endif -->
@@ -83,7 +83,7 @@
             </ul>
         </div><!-- leftpanelinner -->
     </div><!-- leftpanel -->
-  
+
     <div class="mainpanel">
         <div class="headerbar"><!--<a class="menutoggle"><i class="fa fa-bars"></i></a>-->
         <div class="header-right">
@@ -104,7 +104,7 @@
     </div><!-- headerbar -->
 
     @yield('content')
-  
+
     </div><!-- mainpanel -->
 </section>
 

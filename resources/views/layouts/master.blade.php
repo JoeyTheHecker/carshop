@@ -88,8 +88,8 @@
                     </div>
                 @endguest
                 </div>
-                
-                
+
+
             </div>
         </div>
     </nav>
@@ -136,7 +136,7 @@
                         </svg>
                         <span class="sr-only">Discord community</span>
                     </a>
-                  
+
                     <a href="#" class="text-white hover:text-gray-900 dark:hover:text-white ms-5">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
@@ -154,27 +154,27 @@
     <script>
         // Set the target date for the countdown
         const targetDate = new Date("2024-12-31T23:59:59").getTime(); // Change to your target date and time
-    
+
         // Update the countdown every second
         const countdownTimer = setInterval(function () {
             // Get current date and time
             const now = new Date().getTime();
-    
+
             // Calculate the difference between now and the target date
             const timeDifference = targetDate - now;
-    
+
             // Time calculations for days, hours, minutes, and seconds
             const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-    
+
             // Display the result in the respective elements
             document.getElementById("days").innerHTML = days;
             document.getElementById("hours").innerHTML = hours;
             document.getElementById("minutes").innerHTML = minutes;
             document.getElementById("seconds").innerHTML = seconds;
-    
+
             // If the countdown is finished, stop the timer and display a message
             if (timeDifference < 0) {
                 clearInterval(countdownTimer);
@@ -182,6 +182,8 @@
             }
         }, 1000);
     </script>
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+     integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     @yield('javascript')
 </body>
 

@@ -1,6 +1,24 @@
 @extends('layouts.master')
 
 @section('content')
+  <!-- Alert Container (initially hidden) -->
+  <div id="floating-alert" class="hidden fixed top-4 left-4 z-50 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 shadow-lg" role="alert">
+    <span class="font-medium">Intent has successfuly been send.</span>
+  </div>
+
+  @if(session('status'))
+    <div class="alert" role="alert" style="background-color: #86efac">
+    <p class="mb-0 text-center">{{session('status')}}</p>
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger" role="alert">
+        @foreach ($errors->all() as $error)
+            <p class="mb-0 text-center">{{ucfirst($error)}}</p>
+        @endforeach
+    </div>
+@endif
 <div class="grid grid-cols-3 gap-4 px-4 mx-auto max-w-screen-xl py-8">
 
     <!-- Vehicle Listings Section -->
@@ -164,7 +182,7 @@
 
                 <!-- Buy Now Button with fixed width -->
                 <div class="flex w-96">
-                    <button data-modal-target="buy-modal" data-modal-toggle="buy-modal"
+                    <button data-modal-target="formLoi" data-modal-toggle="formLoi" id="showLoiFOrm"
                         class="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-1/2 rounded-l-lg">Buy
                         Now</button>
                     <div class="bg-gray-300 font-semibold text-center text-black px-4 py-2 rounded-r-lg w-1/2">PHP
@@ -226,6 +244,91 @@
         </div>
     </div>
 </div>
+    <!-- Buy Main modal -->
+    <div id="formLoi" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-1/2 max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-start justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <div class="flex justify-start flex-col">
+                        <h3 class="text-2xl font-extrabold text-gray-900 dark:text-white">
+                            LETTER OF INTENT
+                        </h3>
+                        <h3 class="text-2xl text-gray-900 dark:text-white" >
+                            {{ $data->product_name }}
+                        </h3>
+                        <h3 class="text-2xl text-gray-900 dark:text-white" >
+                            ₱{{ $data->clearSellingPrice() }}
+                        </h3>
+                    </div>
+                    <button type="button" id="closeModal"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="formLoi">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <form class="p-4 md:p-5" id="loiForm" method="post" action="{{ url('/api/customer_loi') }}">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="customer_product_id" name="customer_product_id" value="{{ $data->id }}">
+                    <input type="hidden" id="agent_name" name="agent_name">
+                    <div class="grid gap-4 mb-4 grid-cols-2">
+                        <div class="col-span-1">
+                            <label for="name"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name/Company
+                                Name</label>
+                            <input type="text" name="customer_name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Juan Dela Cruz" required="">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
+                                Address</label>
+                            <input type="email" name="customer_email" id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="name@company.com" required="">
+                        </div>
+                        <div class="col-span-2">
+                            <label for="address"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                            <input type="text" name="customer_address" id="address"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="Brgy. 84 San Jose, Tacloban City" required="">
+                        </div>
+
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="price"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile
+                                Number</label>
+                            <input type="text" name="customer_mobile" id="mobilenumber"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="09123456789" required="">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="price"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Request
+                                Price</label>
+                            <input type="number" name="bid_amount" id="reqprice"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                placeholder="PHP 999,9999" required="">
+                        </div>
+                        <button
+                            class="col-span-2 text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                            Submit Intent
+                        </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('javascript')
@@ -235,5 +338,53 @@
     document.getElementById(index).click();
 }
 </script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+<script>
+    $(document).ready(function() {
+    $(document).on('submit', '#loiForm', function(event){
+        event.preventDefault(); // Prevent default form submission (page refresh)
+        var url = $("form#loiForm").prop("action");
+        var data = $("form#loiForm").serialize();
+        var method = $("form#loiForm").attr("method");
 
+        $.ajax({
+            type: method,
+            url: url,
+            data : data,
+            dataType : 'json',
+            success :  function(data) {
+
+                $("form#loiForm p.errors").remove();
+
+                if(data.success == true){
+                    $("#loiForm").trigger("reset");
+                    closeModal()
+                    showFloatingAlert()
+                }else{
+                    $.each( data.errors, function( key, value ) {
+                        $("#"+key).after('<p class="errors text-danger" style="padding-top: 3px; font-size: 10px;">'+value+'</p>');
+                    });
+                }
+            }
+        });
+        return false;
+    });
+
+    function showFloatingAlert() {
+      // Show the floating alert by removing the 'hidden' class
+      const alert = document.getElementById('floating-alert');
+      alert.classList.remove('hidden');
+    console.log('showFloatingAlert');
+      // Automatically hide the alert after 5 seconds
+      setTimeout(() => {
+        alert.classList.add('hidden');
+      }, 7000); // Alert disappears after 5 seconds
+    }
+
+    function closeModal() {
+    // Get the button by its ID and simulate a click
+    document.getElementById('closeModal').click();
+    }
+});
+</script>
 @stop
