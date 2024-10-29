@@ -14,11 +14,6 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('product_code')->index();
-            $table->integer('category_id')->index()->nullable();
-            $table->integer('group_id')->index();
-            $table->string('region_name')->index();
-            $table->string('location_name')->index();
-            $table->string('origin_barangay')->index();
             $table->string('product_name')->index();
             $table->string('unit_name');
             $table->string('brand_name')->index();
@@ -33,14 +28,6 @@ return new class extends Migration
             $table->string('classification')->nullable();
             $table->string('document_status')->nullable();
             $table->string('custody')->nullable();
-            $table->string('repo_yard')->nullable();
-            $table->integer('is_rating')->nullable();
-            $table->integer('view_counter')->nullable();
-            $table->integer('is_best_deal')->index()->nullable();
-            $table->integer('is_featured')->index()->nullable();
-            $table->integer('is_sale')->index()->nullable();
-            $table->integer('is_new_repo')->index()->nullable();
-            $table->integer('is_premium')->index()->nullable();
             $table->tinyInteger('status')->default(0)->index();
             $table->string('image')->nullable();
             $table->string('mileage')->nullable();
@@ -50,7 +37,6 @@ return new class extends Migration
             $table->decimal('min_bid_price', 8, 2)->default(0.7);
             $table->date('puo_date')->nullable();
             $table->string('puo_number')->nullable();
-            $table->integer('sub_category_id')->nullable()->index();
             $table->string('tct_no')->nullable();
             $table->string('appliance_type')->nullable();
             $table->string('bmlv')->nullable();

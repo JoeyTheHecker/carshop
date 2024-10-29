@@ -196,7 +196,7 @@
             <!-- Vehicle Search -->
             <div class="bg-white shadow-md rounded-md p-4 mb-4">
                 <h2 class="text-xl font-bold mb-4">Vehicle Search</h2>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="brands" class="block text-sm font-medium">All Brands</label>
                     <select id="brands" class="w-full mt-1 p-2 border rounded-md">
                         <option>Toyota</option>
@@ -206,7 +206,7 @@
                         <option>Audi</option>
                         <option>Kia</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="mb-4">
                     <label for="price-range" class="block text-sm font-medium">Price Range</label>
                     <select id="price-range" class="w-full mt-1 p-2 border rounded-md">

@@ -6,7 +6,7 @@
         <div class="grid grid-cols-2 gap-4 col-span-2" id="result">
             <img src="{{ URL::asset('images/loaders/loader10.gif') }}" alt="Loading..."  title="Loading..."> Loading...
         </div>
-        
+
         <!-- Search and Recommendations Section -->
         <div class="col-span-1">
             <div class="bg-gray-100 p-4">
@@ -14,7 +14,7 @@
                 <form id="search" data-action="{{ url('api/products') }}">
                     <div class="bg-white shadow-md rounded-md p-4 mb-4">
                         <h2 class="text-xl font-bold mb-4">Vehicle Search</h2>
-                        <div class="mb-4">
+                        {{-- <div class="mb-4">
                             <label for="brands" class="block text-sm font-medium">All Brands</label>
                             <select id="brands" class="w-full mt-1 p-2 border rounded-md">
                                 <option>Toyota</option>
@@ -24,7 +24,7 @@
                                 <option>Audi</option>
                                 <option>Kia</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="mb-4">
                             <label for="price-range" class="block text-sm font-medium">Price Range</label>
                             <select id="price-range" class="w-full mt-1 p-2 border rounded-md">
@@ -44,7 +44,7 @@
                         <button id="searchByKeywords" data-url="{{ url('/product/search/?keyword=') }}" class="w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Search</button>
                     </div>
                 </form>
-                
+
 
                 <!-- Inquiry Form -->
                 <div class="bg-white shadow-md rounded-md p-4">
@@ -83,8 +83,8 @@ var result = function(url, data = false) {
         type: "GET",
         data: data,
         success: function(data){
-            $('#result').html(data);    
-        }   
+            $('#result').html(data);
+        }
     });
 };
 
@@ -96,7 +96,7 @@ $(document).on('click', '#pagination-wrapper a', function(e){
     e.preventDefault();
     var ahref = $(this).attr('href');
     var data = $("form#search").serialize();
-   
+
     result(ahref, data);
     $('html,body').animate({
     scrollTop: $("#result").offset().top},
@@ -115,7 +115,7 @@ $(document).keypress(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
     if(keycode == '13'){
         var data = $("form#search").serialize();
-        result(url, data);  
+        result(url, data);
         event.preventDefault();
     }
 });
@@ -123,7 +123,7 @@ $(document).keypress(function(event){
 $(document).on('click', 'button.download-btn1', function(e){
     var url_download = $(this).data("action");
     var data = $("form#search").serialize();
-    window.open(url_download+"?"+data, "_blank"); 
+    window.open(url_download+"?"+data, "_blank");
     e.preventDefault();
 });
 });

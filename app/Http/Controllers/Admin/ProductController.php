@@ -156,22 +156,12 @@ class ProductController extends Controller
         }
 
         $a1 = array(
-            'puo_date' => 'required',
-            'puo_number' => 'required|string|max:100',
-            'group_id' => 'required|integer',
-            'brand_id' => 'required|integer',
-            'region_name' => 'required|string|max:100',
-            'location_name' => 'required|string|max:100',
-            'origin_barangay' => 'required|string|max:100',
-            'category_id' => 'required|integer',
-            'sub_category_id' => 'required|integer',
             'product_name' => 'required|string|max:250',
             'unit_name' => 'required|string|max:250',
             'brand_name' => 'required|string|max:250',
             'latest_condition' => 'required|string|max:250',
             'document_status' => 'required|string|max:250',
             'custody' => 'required|string|max:250',
-            'repo_yard' => 'required|string|max:250',
             'inventory_price' => array('required','regex:'.$regex),
             'selling_price' => array('required','regex:'.$regex),
             'market_value' => array('required','regex:'.$regex),
@@ -203,16 +193,7 @@ class ProductController extends Controller
         }
 
         $products->product_code = 0;
-        $products->category_id = (int)$request->category_id;
-        $products->sub_category_id = (int)$request->sub_category_id;
         $products->brand_id = (int)$request->brand_id;
-        $products->is_display_on = (int)$request->is_display_on;
-        $products->puo_date = (string)$request->puo_date != '' ? (string)$request->puo_date : date('Y-m-d');
-        $products->puo_number = (string)$request->puo_number;
-        $products->group_id = (int)$request->group_id;
-        $products->region_name = (string)$request->region_name;
-        $products->location_name = (string)$request->location_name;
-        $products->origin_barangay = (string)$request->origin_barangay;
         $products->product_name = (string)$request->product_name;
         $products->unit_name = (string)$request->unit_name;
         $products->brand_name = (string)$request->brand_name;
@@ -230,13 +211,6 @@ class ProductController extends Controller
         $products->classification = (string)$request->classification;
         $products->document_status = (string)$request->document_status;
         $products->custody = (string)$request->custody;
-        $products->repo_yard = (string)$request->repo_yard;
-        $products->is_rating = (int)$request->is_rating;
-        $products->is_best_deal = (int)$request->is_best_deal;
-        $products->is_featured = (int)$request->is_featured;
-        $products->is_sale = (int)$request->is_sale;
-        $products->is_new_repo = (int)$request->is_new_repo;
-        $products->is_premium = (int)$request->is_premium;
         $products->status = (int)$request->product_status;
         $products->min_bid_price = $request->min_bid_price;
         $products->featured_video = $products->getYoutubeVideoId((string)$request->featured_video);

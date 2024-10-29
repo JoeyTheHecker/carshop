@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="pageheader">
-  <h2>Products</h2> 
+  <h2>Products</h2>
   <div class="breadcrumb-wrapper">
     <span class="label">
         <div class="btn-group mr5">
@@ -49,43 +49,7 @@
                         <div class="panel-body" style="padding: 10px 0px;">
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="group_id" id="group_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Group</option>
-                                        @foreach($groups as $g)
-                                            <option value="{{ $g->id }}">{{ $g->display }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Categories</option>
-                                        @foreach($categories as $c)
-                                                <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="region_name" placeholder="Region Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="location_name" placeholder="Location" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
                                     <input type="text" class="form-control end_date" name="product_name" placeholder="Product Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <!-- <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="brand_name" placeholder="Brand Name" style="width: 100%;">
-                                </div> -->
-                                <!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="puo_number" placeholder="PUO Number" style="width: 100%;">
                                 </div><!-- col-md-3 col-lg-3 -->
                                 <div class="col-md-3 col-lg-3 ptb-5">
                                     <select name="min_bid_price" id="min_bid_price" class="form-control" style="width: 100%;">
@@ -97,7 +61,7 @@
                                 <div class="col-md-6 col-lg-6 ptb-5">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success search-btn" style="height: 39px;" data-id="1"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
-                                        <button type="button" class="btn btn-primary download-btn1" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button>
+                                        {{-- <button type="button" class="btn btn-primary download-btn1" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button> --}}
                                     </div>
                                 </div><!-- col-md-6 col-lg-6 -->
                             </div>
@@ -112,42 +76,7 @@
                         <div class="panel-body" style="padding: 10px 0px;">
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="group_id" id="group_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Group</option>
-                                        @foreach($groups as $g)
-                                            <option value="{{ $g->id }}">{{ $g->display }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Categories</option>
-                                        @foreach($categories as $c)
-                                                <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="region_name" placeholder="Region Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="location_name" placeholder="Location" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
                                     <input type="text" class="form-control end_date" name="product_name" placeholder="Product Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <!--<div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="brand_name" placeholder="Brand Name" style="width: 100%;">
-                                </div> --><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="puo_number" placeholder="PUO Number" style="width: 100%;">
                                 </div><!-- col-md-3 col-lg-3 -->
                                 <div class="col-md-3 col-lg-3 ptb-5">
                                     <select name="min_bid_price" id="min_bid_price" class="form-control" style="width: 100%;">
@@ -159,7 +88,7 @@
                                 <div class="col-md-6 col-lg-6 ptb-5">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success search-btn" style="height: 39px;" data-id="2"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
-                                        <button type="button" class="btn btn-primary download-btn2" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button>
+                                        {{-- <button type="button" class="btn btn-primary download-btn2" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button> --}}
                                     </div>
                                 </div><!-- col-md-6 col-lg-6 -->
                             </div>
@@ -174,42 +103,7 @@
                         <div class="panel-body" style="padding: 10px 0px;">
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="group_id" id="group_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Group</option>
-                                        @foreach($groups as $g)
-                                            <option value="{{ $g->id }}">{{ $g->display }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Categories</option>
-                                        @foreach($categories as $c)
-                                                <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="region_name" placeholder="Region Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="location_name" placeholder="Location" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
                                     <input type="text" class="form-control end_date" name="product_name" placeholder="Product Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <!--<div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="brand_name" placeholder="Brand Name" style="width: 100%;">
-                                </div> --><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="puo_number" placeholder="PUO Number" style="width: 100%;">
                                 </div><!-- col-md-3 col-lg-3 -->
                                 <div class="col-md-3 col-lg-3 ptb-5">
                                     <select name="min_bid_price" id="min_bid_price" class="form-control" style="width: 100%;">
@@ -221,7 +115,7 @@
                                 <div class="col-md-6 col-lg-6 ptb-5">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success search-btn" style="height: 39px;" data-id="3"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
-                                        <button type="button" class="btn btn-primary download-btn3" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button>
+                                        {{-- <button type="button" class="btn btn-primary download-btn3" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button> --}}
                                     </div>
                                 </div><!-- col-md-6 col-lg-6 -->
                             </div>
@@ -236,42 +130,7 @@
                         <div class="panel-body" style="padding: 10px 0px;">
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="group_id" id="group_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Group</option>
-                                        @foreach($groups as $g)
-                                            <option value="{{ $g->id }}">{{ $g->display }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Categories</option>
-                                        @foreach($categories as $c)
-                                                <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="region_name" placeholder="Region Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="location_name" placeholder="Location" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
                                     <input type="text" class="form-control end_date" name="product_name" placeholder="Product Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <!-- <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="brand_name" placeholder="Brand Name" style="width: 100%;">
-                                </div> --><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="puo_number" placeholder="PUO Number" style="width: 100%;">
                                 </div><!-- col-md-3 col-lg-3 -->
                                 <div class="col-md-3 col-lg-3 ptb-5">
                                     <select name="min_bid_price" id="min_bid_price" class="form-control" style="width: 100%;">
@@ -283,7 +142,7 @@
                                 <div class="col-md-6 col-lg-6 ptb-5">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-success search-btn" style="height: 39px;" data-id="4"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
-                                        <button type="button" class="btn btn-primary download-btn4" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button>
+                                        {{-- <button type="button" class="btn btn-primary download-btn4" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button> --}}
                                     </div>
                                 </div><!-- col-md-6 col-lg-6 -->
                             </div>
@@ -293,62 +152,6 @@
                         <div id="result4"><img src="{{ URL::asset('images/loaders/loader10.gif') }}" alt="Loading..."  title="Loading..."></div>
                     </form>
                 </div><!-- tab-pane -->
-                {{-- <div id="isBidding" class="tab-pane" style="display: none;">
-                    <form id="search5" data-id="5" class="form-inline" data-action="{{ url('/product/summary/bidding') }}">
-
-                        <div class="panel-body" style="padding: 10px 0px;">
-                            <div class="row">
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="group_id" id="group_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Group</option>
-                                        @foreach($groups as $g)
-                                            <option value="{{ $g->id }}">{{ $g->display }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <select name="category_id" id="category_id" class="form-control" style="width: 100%;">
-                                        <option value="">All Categories</option>
-                                        @foreach($categories as $c)
-                                                <option value="{{ $c->id }}">{{ $c->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="region_name" placeholder="Region Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control" name="location_name" placeholder="Location" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="product_name" placeholder="Product Name" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <!-- <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="brand_name" placeholder="Brand Name" style="width: 100%;">
-                                </div>--><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-3 col-lg-3 ptb-5">
-                                    <input type="text" class="form-control end_date" name="puo_number" placeholder="PUO Number" style="width: 100%;">
-                                </div><!-- col-md-3 col-lg-3 -->
-                                <div class="col-md-6 col-lg-6 ptb-5">
-                                    <div class="form-group">
-                                        <button type="button" class="btn btn-success search-btn" style="height: 39px;" data-id="5"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
-                                        <button type="button" class="btn btn-primary download-btn5" style="height: 39px;" data-action="{{ url('/web/product/download') }}">Download Excel</button>
-                                    </div>
-                                </div><!-- col-md-6 col-lg-6 -->
-                            </div>
-                        </div>
-
-                        <input type="hidden" name="type" value="4">
-                        <div id="result5"><img src="{{ URL::asset('images/loaders/loader10.gif') }}" alt="Loading..."  title="Loading..."></div>
-                    </form>
-                </div><!-- tab-pane --> --}}
             </div><!-- panel-body -->
         </div>
     </div>
@@ -385,9 +188,9 @@ function changeStatus(status, id) {
             $('#statusModal').modal('show');
             $("tr#div_"+id+"").remove();
 
-            var delay = 3500; 
+            var delay = 3500;
             setTimeout(function(){ location.reload(true); }, delay);
-        }   
+        }
     });
 }
 </script>

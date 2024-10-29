@@ -14,14 +14,11 @@
             <tr role="row">
                 <th><input type="checkbox" id="myCheckbox" /></th>
                 <th>No.</th>
-                <th>Website</th>
-                <th>Product Name / PUO Date / PUO No.</th>
+                <th>Product Name </th>
                 <th>Unit Price</th>
                 <th>Customer Name</th>
                 <th>Email / Mobile</th>
-                <th>Address</th>
-                <th>Region</th>
-                <th>Amount</th>
+                <th>Request Price</th>
                 <th>Date</th>
             </tr>
         </thead>
@@ -40,20 +37,7 @@
                 <td><input type="checkbox" name="rows[]" value="{{ $d->id }}" class="myCheckbox" /></td>
                 <td>{{ $i++ }}</td>
                 <td>
-                    <?php
-                        if($d->is_display_on == 1){
-                            echo 'Rfshop';
-                        }elseif($d->is_display_on == 2){
-                            echo 'Carsurplus';
-                        }else{
-                            echo 'Both Rfshop & Carsurplus';
-                        }
-                    ?>
-                </td>
-                <td>
-                    <b>{{ $d->getProduct($d->product_id) }}</b> /<br/>
-                    {{ $d->getProductPuoDate($d->product_id) }} /<br/>
-                    {{ $d->getProductPuoNumber($d->product_id) }}
+                    <b>{{ $d->getProduct($d->product_id) }}</b>
                 </td>
                 <td>PHP {{ $d->getProductSellingPrice($d->product_id) }}</td>
                 <td>{{ $d->name }}</td>
@@ -61,8 +45,6 @@
                     {{ $d->email }}<br/>
                     {{ $d->contact_number }}
                 </td>
-                <td>{{ $d->address }}</td>
-                <td>{{ $d->region }}</td>
                 <td>PHP {{ $d->bid_amount }}</td>
                 <td>{{ date("d M Y", strtotime($d->created_at)) }}</td>
             </tr>

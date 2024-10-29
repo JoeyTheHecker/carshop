@@ -20,13 +20,6 @@
                             <h3 class="panel-title">Search Parameter</h3><br/>
                             <div class="row row-pad-5">
                                 <div class="col-md-3 col-lg-2">
-                                    <select name="is_display_on" id="is_display_on" class="form-control" style="width: 100%; height: 40px;">
-                                        <option value="0">All Website</option>
-                                        <option value="1">Rfshop Only</option>
-                                        <option value="2">Carsurplus Only</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-3 col-lg-2">
                                     <input type="text" class="form-control" id="search_name" name="search_name" placeholder="Email" style="width: 100%;">
                                 </div>
                                 <div class="col-md-2 col-lg-2">
@@ -38,9 +31,9 @@
                                 <div class="col-md-2 col-lg-2">
                                     <button type="button" class="btn btn-success search-btn" style="height: 39px; width: 100%;"> <i class="glyphicon glyphicon-zoom-in"></i> Search</button>
                                 </div>
-                                <div class="col-md-2 col-lg-2">
+                                {{-- <div class="col-md-2 col-lg-2">
                                     <button type="button" class="btn btn-primary download-btn1" style="height: 39px; width: 100%;" data-action="{{ url('/web/loi/download') }}">Download Excel</button>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 

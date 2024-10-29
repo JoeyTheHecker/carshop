@@ -50,7 +50,7 @@
                 </div>
             </div><!-- panel -->
         </div>
-        <div class="col-md-8">
+        {{-- <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" style="color: blue; margin: 0px;"><b>LOCATION</b></h4>
@@ -95,8 +95,8 @@
                     </div>
                 </div>
             </div><!-- panel -->
-        </div>
-        <div class="col-md-4">
+        </div> --}}
+        {{-- <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" style="color: blue; margin: 0px;"><b>PUO DETAILS</b></h4>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div><!-- panel -->
-        </div>
+        </div> --}}
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -195,7 +195,7 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title" style="color: blue; margin: 0px;"><b>PRICING DETAILS</b> - <lable style="color: #222; font-size: 14px;">Enter amount without 'Comma'</lable></h4> 
+                    <h4 class="panel-title" style="color: blue; margin: 0px;"><b>PRICING DETAILS</b> - <lable style="color: #222; font-size: 14px;">Enter amount without 'Comma'</lable></h4>
                 </div><!-- panel-heading -->
                 <div class="panel-body">
                     <div class="col-sm-4 col-md-4">
@@ -210,7 +210,7 @@
                 </div>
             </div><!-- panel -->
         </div>
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" style="color: blue; margin: 0px;"><b>RATING DETAILS</b></h4>
@@ -228,8 +228,8 @@
                     </div>
                 </div>
             </div><!-- panel -->
-        </div>
-        <div class="col-md-12">
+        </div> --}}
+        {{-- <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title" style="color: blue; margin: 0px;"><b>VISIBILITY DETAILS</b></h4>
@@ -280,7 +280,7 @@
                     </div>
                 </div>
             </div><!-- panel -->
-        </div>
+        </div> --}}
         <div class="col-sm-12 col-md-12">
             <button id="submit_btn" class="btn btn-primary c-btn">SUBMIT</button>
             <button type="button" class="btn btn-primary c-btn fake_btn" style="background-color: #6c757d; border: 1px solid #6c757d; display: none;" >Processing...</button>
