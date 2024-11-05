@@ -177,7 +177,7 @@
                         class="text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-bold text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 w-1/2 rounded-l-lg">Bid
                         Now</button>
                     <div class="bg-gray-300 font-semibold text-center text-black px-4 py-2 rounded-r-lg w-1/2">PHP
-                        910,000</div>
+                        {{ number_format($bidding_data->max_amount) }}</div>
                 </div>
 
                 <!-- Buy Now Button with fixed width -->
@@ -328,6 +328,102 @@
             </div>
         </div>
     </div>
+</div>
+<!-- Bid Main modal -->
+<div id="bid-modal" tabindex="-1" aria-hidden="true"
+class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+<div class="relative p-4 w-1/2 max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <div class="flex flex-col">
+                <h3 class="text-3xl font-extrabold text-gray-900 dark:text-white">
+                    Innova 2.8 G Diesel M/T
+                </h3>
+                <span class="text-sm">Current Highest Bid Price</span>
+                <span class="text-xl font-bold">{{ number_format($bidding_data->max_amount) }}</span>
+            </div>
+            <button type="button"
+                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                data-modal-toggle="bid-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+        </div>
+        <!-- Modal body -->
+        <form class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+                <div class="col-span-1">
+                    <label for="productId"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
+                        Identification Number</label>
+                    <input type="number" name="productId" id="productId"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder="{{ $data->product_identification_number }}" disabled>
+                </div>
+                <div class="col-span-1">
+                    <label for="bidamount"
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bid Amount</label>
+                    <input type="email" name="bidamount" id="bidamount"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        value="{{ number_format($bidding_data->max_amount + 5000) }}">
+                </div>
+            </div>
+
+            <div class="mt-10">
+                <div class="border-b border-gray-300 pb-4">
+                    <h2 class="text-2xl font-bold text-gray-900">Bidding Mechanics</h2>
+                </div>
+
+                <!-- Bidding Process Section -->
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Bidding Process</h3>
+                    <ol class="list-decimal px-8 mt-2 space-y-1 text-gray-700">
+                        <li>After submitting the bid form, guests can place their bid.</li>
+                        <li>Each guest can submit only one bid per vehicle.</li>
+                        <li>Bids must be in increments of Php 5,000.00.</li>
+                        <li>Guests can bid again if their offer has been outbid.</li>
+                    </ol>
+                </div>
+
+                <!-- Winning Bid and Non-Purchase Section -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Winning Bid and Non-Purchase</h3>
+                    <ol class="list-decimal px-8 mt-2 space-y-1 text-gray-700">
+                        <li>
+                            If a guest wins the bid but does not purchase the vehicle, the guest will be
+                            reviewed, and if the reason given is unacceptable, said guest will be
+                            <span class="font-semibold">banned for six months.</span>
+                        </li>
+                        <li>Outbid notification will be sent out via email.</li>
+                        <li>The admin will contact the winning bidder to confirm and assist with the purchase.
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Agreement Checkbox -->
+                <div class="my-6 flex items-start">
+                    <input id="agreement" type="checkbox"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
+                    <label for="agreement" class="ml-2 text-sm text-gray-700">
+                        By placing a bid, I agree to the Toyota Tacloban Online Bidding Terms and Conditions.
+                    </label>
+                </div>
+            </div>
+
+
+            <button type="submit"
+                class="w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                Submit Bid
+            </button>
+        </form>
+    </div>
+</div>
 </div>
 @endsection
 

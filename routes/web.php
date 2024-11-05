@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
+
 
 Route::resource('vehicles', VehicleController::class);
 
@@ -47,7 +47,7 @@ Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::cla
 
 Route::get('/insert-bidding-config', function () {
     DB::table('bidding_config')->insert([
-        'start_day' => 'Tue',
+        'start_day' => 'Mon',
         'start_hour' => '08',
         'bidding_hours' => 129,
     ]);

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('product_code')->index();
+            $table->string('product_identification_number', 255);
             $table->string('product_name')->index();
             $table->string('unit_name');
             $table->string('brand_name')->index();
@@ -27,7 +28,6 @@ return new class extends Migration
             $table->string('latest_condition')->nullable();
             $table->string('classification')->nullable();
             $table->string('document_status')->nullable();
-            $table->string('custody')->nullable();
             $table->tinyInteger('status')->default(0)->index();
             $table->string('image')->nullable();
             $table->string('mileage')->nullable();

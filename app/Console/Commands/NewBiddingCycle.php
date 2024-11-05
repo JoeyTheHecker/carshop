@@ -40,11 +40,15 @@ class NewBiddingCycle extends Command
         Log::info('new bidding cycle running');
 
         $rst = DB::table('bidding_config')->first();
-
+        Log::info(date('D'));
+        Log::info($rst->start_day);
+        Log::info(date('H'));
+        Log::info($rst->start_hour);
         //only run when current date-time is tuesday 8am
         if (date('D') != $rst->start_day || date('H') != $rst->start_hour)
             return;
 
+        Log::info('Success');
         $latestBiddingCycle = DB::table('bidding_cycles')
             ->orderBy('id', 'desc')
             ->first();

@@ -152,11 +152,12 @@
     </footer>
 
     <script>
-        // Set the target date for the countdown
-        const targetDate = new Date("2024-12-31T23:59:59").getTime(); // Change to your target date and time
+       @if (isset($data['bidding_cycles']))
+            // Set the target date for the countdown
+            const targetDate = new Date("{{$data['bidding_cycles']->end_date}}").getTime(); // Change to your target date and time
 
-        // Update the countdown every second
-        const countdownTimer = setInterval(function () {
+            // Update the countdown every second
+            const countdownTimer = setInterval(function () {
             // Get current date and time
             const now = new Date().getTime();
 
@@ -180,7 +181,8 @@
                 clearInterval(countdownTimer);
                 document.getElementById("countdown").innerHTML = "<p class='text-3xl font-bold text-red-500'>Bidding has ended</p>";
             }
-        }, 1000);
+            }, 1000);
+       @endif
     </script>
      <script src="https://code.jquery.com/jquery-3.6.4.min.js"
      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

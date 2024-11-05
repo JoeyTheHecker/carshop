@@ -134,10 +134,13 @@ class ProductController extends Controller
         $brandCar = new BrandCar();
         $brandForCar = $brandCar->getAll();
 
+        $products = new Products();
+
         return view('products.create')
         ->with('groups', $groupsQuery)
         ->with('brand_for_car', $brandForCar)
-        ->with('categories', $categoriesQuery);
+        ->with('categories', $categoriesQuery)
+        ->with('product', $products);
     }
 
     public function store(Request $request)
@@ -157,11 +160,11 @@ class ProductController extends Controller
 
         $a1 = array(
             'product_name' => 'required|string|max:250',
+            'product_identification_number' => 'required|integer',
             'unit_name' => 'required|string|max:250',
             'brand_name' => 'required|string|max:250',
             'latest_condition' => 'required|string|max:250',
             'document_status' => 'required|string|max:250',
-            'custody' => 'required|string|max:250',
             'inventory_price' => array('required','regex:'.$regex),
             'selling_price' => array('required','regex:'.$regex),
             'market_value' => array('required','regex:'.$regex),
@@ -193,6 +196,7 @@ class ProductController extends Controller
         }
 
         $products->product_code = 0;
+        $products->product_identification_number = $request->product_identification_number;
         $products->brand_id = (int)$request->brand_id;
         $products->product_name = (string)$request->product_name;
         $products->unit_name = (string)$request->unit_name;
@@ -210,7 +214,6 @@ class ProductController extends Controller
         $products->latest_condition = (string)$request->latest_condition;
         $products->classification = (string)$request->classification;
         $products->document_status = (string)$request->document_status;
-        $products->custody = (string)$request->custody;
         $products->status = (int)$request->product_status;
         $products->min_bid_price = $request->min_bid_price;
         $products->featured_video = $products->getYoutubeVideoId((string)$request->featured_video);

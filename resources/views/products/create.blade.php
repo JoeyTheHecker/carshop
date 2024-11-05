@@ -7,13 +7,16 @@
 @section('content')
 <div class="pageheader">
     <h2>New Products - Cars</h2>
+    <h3>Product ID: {{ $product->generateUniqueID() }}</h3>
     <div class="breadcrumb-wrapper">
         <span class="label"><a href="{{ url('/product') }}">BACK</a></span>
     </div>
+
 </div>
 
 <form id="submitForm" method="post" action="{{ url('/product/store') }}" enctype="multipart/form-data">
 <input type="hidden" id="category_id" name="category_id" value="1">
+<input type="hidden" id="product_identification_number" name="product_identification_number" value="{{ $product->generateUniqueID() }}">
 {{ csrf_field() }}
 <div class="contentpanel">
     <div class="row">
@@ -154,12 +157,6 @@
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="is_sold" name="is_sold" placeholder="Is Sold">
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="custody" name="custody" placeholder="Custody *">
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="repo_yard" name="repo_yard" placeholder="Repo Yard *">
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="document_status" name="document_status" placeholder="Document Status *">

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Products extends Model
 {
@@ -14,12 +15,12 @@ class Products extends Model
     protected $guarded = [];
 
     public $timestamps = true;
-    
+
     protected $casts = [
         'min_bid_price' => 'decimal:2',
     ];
 
-    
+
     const STATUS_ACTIVE = 0;
     const STATUS_INACTIVE = 1;
     const STATUS_SOLD = 2;
@@ -82,10 +83,10 @@ class Products extends Model
     public function getYoutubeVideoId($url) {
         // Regular expression to extract video ID from YouTube URL
         $pattern = '/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
-    
+
         // Execute the regular expression
         preg_match($pattern, $url, $matches);
-    
+
         // Check if a match was found
         if (isset($matches[1])) {
             // Return the video ID
@@ -99,5 +100,14 @@ class Products extends Model
     public function clearSellingPrice()
     {
         return number_format($this->selling_price, 2);
+    }
+    public static function minBidPrice($id)
+    {
+        $product = DB::table('products')
+        ->where('id', $id)
+        ->select('min_bid_price')
+        ->first();
+
+        return $product ? $product->min_bid_price : null;
     }
 }
