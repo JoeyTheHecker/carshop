@@ -162,7 +162,6 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:250',
             'product_identification_number' => 'required|integer',
             'unit_name' => 'required|string|max:250',
-            'brand_name' => 'required|string|max:250',
             'latest_condition' => 'required|string|max:250',
             'document_status' => 'required|string|max:250',
             'inventory_price' => array('required','regex:'.$regex),
@@ -200,7 +199,6 @@ class ProductController extends Controller
         $products->brand_id = (int)$request->brand_id;
         $products->product_name = (string)$request->product_name;
         $products->unit_name = (string)$request->unit_name;
-        $products->brand_name = (string)$request->brand_name;
         $products->year_model = (int)$request->year_model;
         $products->descriptions = (string)$request->descriptions;
         $products->plate_number = (string)$request->plate_number;

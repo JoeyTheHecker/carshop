@@ -121,30 +121,10 @@
                 </div><!-- panel-heading -->
                 <div class="panel-body">
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <select name="brand_id" id="brand_id" class="form-control">
-                            <option value="">Select a Car Brand</option>
-                            @foreach($brand_for_car as $bc)
-                                <option value="{{ $bc->id }}">{{ $bc->brand_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <select name="sub_category_id" id="sub_category_id" class="form-control">
-                            <option value="">Select Vehicle Type</option>
-                            <option value="1">Vehicle</option>
-                            <option value="2">Trucks</option>
-                            <option value="3">Heavy Equipments</option>
-                            <option value="4">Motorcycle</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name *">
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="unit_name" name="unit_name" placeholder="Unit Name *">
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="brand_name" name="brand_name" placeholder="Brand Name *">
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="year_model" name="year_model" placeholder="Year Model">

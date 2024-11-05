@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('product_identification_number', 255);
             $table->string('product_name')->index();
             $table->string('unit_name');
-            $table->string('brand_name')->index();
             $table->string('year_model')->index()->nullable();
             $table->longText('descriptions')->nullable();
             $table->string('plate_number')->nullable();
@@ -40,7 +39,6 @@ return new class extends Migration
             $table->string('tct_no')->nullable();
             $table->string('appliance_type')->nullable();
             $table->string('bmlv')->nullable();
-            $table->integer('brand_id')->nullable()->index();
             $table->integer('is_display_on')->nullable()->index();
             $table->string('featured_video')->nullable();
             $table->timestamps();
