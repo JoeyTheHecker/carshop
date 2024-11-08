@@ -196,7 +196,6 @@ class ProductController extends Controller
 
         $products->product_code = 0;
         $products->product_identification_number = $request->product_identification_number;
-        $products->brand_id = (int)$request->brand_id;
         $products->product_name = (string)$request->product_name;
         $products->unit_name = (string)$request->unit_name;
         $products->year_model = (int)$request->year_model;

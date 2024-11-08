@@ -24,8 +24,10 @@ return new class extends Migration
             $table->string('birth_date');
             $table->text('address');
             $table->text('source_of_income');
-            $table->string('company_name');
             $table->string('e_signature');
+            $table->string('govt_id');
+            $table->string('selfie_with_id');
+            $table->string('status')->default('pending');
         });
     }
 

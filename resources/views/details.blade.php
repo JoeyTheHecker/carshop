@@ -356,22 +356,24 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
             </button>
         </div>
         <!-- Modal body -->
-        <form class="p-4 md:p-5">
+        <form class="p-4 md:p-5" method="post" action="{{ route('place-bid', ['id' => $data->id]) }}">
+            {{ csrf_field() }}
+            <input type="hidden" id="product_id" name="product_id" value="{{ $data->id }}">
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-1">
                     <label for="productId"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
                         Identification Number</label>
-                    <input type="number" name="productId" id="productId"
+                    <input type="number" name="product_identification_number" id="product_identification_number"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        placeholder="{{ $data->product_identification_number }}" disabled>
+                        value="{{ $data->product_identification_number }}" readonly>
                 </div>
                 <div class="col-span-1">
                     <label for="bidamount"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bid Amount</label>
-                    <input type="email" name="bidamount" id="bidamount"
+                    <input type="text" name="bid_amount" id="bid_amount"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                        value="{{ number_format($bidding_data->max_amount + 5000) }}">
+                        value="{{ $bidding_data->max_amount + 5000 }}">
                 </div>
             </div>
 
@@ -384,7 +386,6 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                 <div class="mt-4">
                     <h3 class="text-lg font-semibold text-gray-900">Bidding Process</h3>
                     <ol class="list-decimal px-8 mt-2 space-y-1 text-gray-700">
-                        <li>After submitting the bid form, guests can place their bid.</li>
                         <li>Each guest can submit only one bid per vehicle.</li>
                         <li>Bids must be in increments of Php 5,000.00.</li>
                         <li>Guests can bid again if their offer has been outbid.</li>

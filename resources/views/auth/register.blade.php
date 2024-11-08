@@ -5,12 +5,21 @@
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div
             class="w-full max-w-xl bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-4xl xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <h1
                     class="text-2xl font-bold leading-tight tracking-tight text-center text-gray-900 md:text-2xl dark:text-white">
                     Create an Account
                 </h1>
-                <form method="POST" action="{{ route('register') }}"class="space-y-4 md:space-y-6">
+                <form method="POST" action="{{ route('user-store') }}"class="space-y-4 md:space-y-6" enctype="multipart/form-data">
                     @csrf
                     <!-- Two-column grid for the form fields -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -33,14 +42,14 @@
                             <label for="mobile"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile
                                 number</label>
-                            <input type="number" name="mobile" id="mobile"
+                            <input type="number" name="mobile_number" id="mobile_number"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="09123456789" >
                         </div>
                         <div>
                             <label for="birthdate"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birthdate</label>
-                            <input type="date" name="birthdate" id="birthdate"
+                            <input type="date" name="date_of_birth" id="date_of_birth"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 >
                         </div>
@@ -58,7 +67,7 @@
                             <label for="income"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source of
                                 Income</label>
-                            <input type="text" name="income" id="income"
+                            <input type="text" name="source_of_income" id="source_of_income"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="" >
                         </div>
@@ -68,7 +77,7 @@
                                 Government ID (with address)</label>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="govId" name="govId" type="file">
+                                id="govt_id" name="govt_id" type="file">
                         </div>
                         <div>
                             <label for="selfId"
@@ -76,14 +85,14 @@
                                 (with ID)</label>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="selfId" name="selfId" type="file">
+                                id="selfie_with_id" name="selfie_with_id" type="file">
                         </div>
                         <div>
                             <label for="esig"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-Signature</label>
                             <input
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                                id="esig" name="esig" type="file">
+                                id="e_signature" name="e_signature" type="file">
                         </div>
                         <div>
                             <label for="password"

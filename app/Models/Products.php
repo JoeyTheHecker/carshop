@@ -110,4 +110,12 @@ class Products extends Model
 
         return $product ? $product->min_bid_price : null;
     }
+
+    public static function isBiddingOpen()
+    {
+        return DB::table('bidding_cycles')
+            ->orderBy('id', 'desc')
+            ->select('id', 'is_open', 'start_date', 'end_date')
+            ->first();
+    }
 }

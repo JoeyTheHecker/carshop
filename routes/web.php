@@ -24,6 +24,7 @@ Route::resource('vehicles', VehicleController::class);
 
 Auth::routes();
 
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
@@ -47,10 +48,14 @@ Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::cla
 
 Route::get('/insert-bidding-config', function () {
     DB::table('bidding_config')->insert([
-        'start_day' => 'Mon',
-        'start_hour' => '08',
+        'start_day' => 'Fri',
+        'start_hour' => '19',
         'bidding_hours' => 129,
     ]);
 
     return "Data inserted successfully!";
 });
+
+Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user-store');
+
+Route::post('/product/details/{id}', [App\Http\Controllers\BidsController::class, 'placeBid'])->name('place-bid');
