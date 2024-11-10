@@ -17,6 +17,8 @@ class ProductController extends Controller
 
         $query = $products->query();
 
+        $query->where('status', '=', 0)->get();
+
         $data = $query->paginate(20);
 
         return view('ajax.search')

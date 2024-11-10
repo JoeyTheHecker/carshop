@@ -65,9 +65,9 @@
                         <li><a href="{{ url('/bidder-accounts#tab1') }}" data-hash="isActive">- Pending</a></li>
                         <li><a href="{{ url('/bidder-accounts#tab2') }}" data-hash="isSold">- Approved</a></li>
                     </ul>
-                </li>
+                </li>  --}}
                 <li><a href="{{ url('/intent') }}"><i class="fa fa-book"></i> Bidder Lists</a></li>
-                <li><a href="{{ url('/web/bidding') }}"><i class="fa fa-book"></i> Bidding Lists</a></li> --}}
+                <li><a href="{{ url('/bidding') }}"><i class="fa fa-book"></i> Bidding Lists</a></li>
                 <li><a href="{{ url('/loi') }}"><i class="fa fa-folder-open-o"></i> LOI Lists</a></li>
                 <!-- @if(Auth::user()->role_id == 0)
                     <li><a href="{{ url('/user') }}"><i class="fa fa-group"></i> User Management</a></li>

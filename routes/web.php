@@ -59,3 +59,13 @@ Route::get('/insert-bidding-config', function () {
 Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user-store');
 
 Route::post('/product/details/{id}', [App\Http\Controllers\BidsController::class, 'placeBid'])->name('place-bid');
+
+Route::get('/bidding', [App\Http\Controllers\Admin\BiddingController::class, 'indexSummary']);
+Route::get('/bidding/summary', [App\Http\Controllers\Admin\BiddingController::class, 'biddingAjaxSummary']);
+
+Route::get('/info/{id}/cycle/{cycle_id}', [App\Http\Controllers\Admin\BiddingController::class, 'biddingInfo'])->name('bidding.info');
+Route::get('/bidding/info/{id}/cycle/{cycle_id}/bidder/{bid_id}', [App\Http\Controllers\Admin\BiddingController::class, 'bidderInfo'])->name('bidder.info');
+
+Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/sold', [App\Http\Controllers\Admin\BiddingController::class, 'productSold'])->name('product.sold');
+Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/backout', [App\Http\Controllers\Admin\BiddingController::class, 'backOutBid'])->name('bid.backout');
+Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/ban_user', [App\Http\Controllers\Admin\BiddingController::class, 'banUser'])->name('user.ban');

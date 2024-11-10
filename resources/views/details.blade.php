@@ -408,13 +408,13 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                 </div>
 
                 <!-- Agreement Checkbox -->
-                <div class="my-6 flex items-start">
+                {{-- <div class="my-6 flex items-start">
                     <input id="agreement" type="checkbox"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2">
                     <label for="agreement" class="ml-2 text-sm text-gray-700">
                         By placing a bid, I agree to the Toyota Tacloban Online Bidding Terms and Conditions.
                     </label>
-                </div>
+                </div> --}}
             </div>
 
 
