@@ -161,13 +161,11 @@ class ProductController extends Controller
         $a1 = array(
             'product_name' => 'required|string|max:250',
             'product_identification_number' => 'required|integer',
-            'unit_name' => 'required|string|max:250',
             'latest_condition' => 'required|string|max:250',
             'document_status' => 'required|string|max:250',
             'inventory_price' => array('required','regex:'.$regex),
             'selling_price' => array('required','regex:'.$regex),
             'market_value' => array('required','regex:'.$regex),
-            'product_status' => 'required|integer',
             'min_bid_price' => 'required|numeric|between:0,1',
         );
 
@@ -197,7 +195,6 @@ class ProductController extends Controller
         $products->product_code = 0;
         $products->product_identification_number = $request->product_identification_number;
         $products->product_name = (string)$request->product_name;
-        $products->unit_name = (string)$request->unit_name;
         $products->year_model = (int)$request->year_model;
         $products->descriptions = (string)$request->descriptions;
         $products->plate_number = (string)$request->plate_number;
@@ -207,11 +204,9 @@ class ProductController extends Controller
         $products->inventory_price = (float)$request->inventory_price;
         $products->selling_price = (float)$request->selling_price;
         $products->market_value = (float)$request->market_value;
-        $products->is_sold = (string)$request->is_sold;
         $products->latest_condition = (string)$request->latest_condition;
-        $products->classification = (string)$request->classification;
         $products->document_status = (string)$request->document_status;
-        $products->status = (int)$request->product_status;
+        $products->status = 0;
         $products->min_bid_price = $request->min_bid_price;
         $products->featured_video = $products->getYoutubeVideoId((string)$request->featured_video);
         $products->image = (string)$imageName;

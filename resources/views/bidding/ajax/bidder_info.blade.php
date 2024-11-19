@@ -20,7 +20,7 @@
                 <div class="input-group" style="width: 100%">
                     <span class="input-group-addon" id="full_name" style="min-width: 30%; text-align: start;">Full
                         name</span>
-                    <input type="text" readonly value="{{$data->full_name}}" class="form-control" id="full_name"
+                    <input type="text" readonly value="{{$data->firstname}}" class="form-control" id="full_name"
                         aria-describedby="full_name">
                 </div>
             </div>
@@ -107,14 +107,11 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" style="text-align:center;">
-                            @if($data->status != 'approved')
+                            {{-- @if($data->status != 'approved')
                                 <li><a data-action="approve" class="action-button bg-success">Accept Offer</a></li>
-                            @endif
+                            @endif --}}
                             @if($data->status != 'sold')
                                 <li><a data-action="sold" class="action-button bg-info">Sold</a></li>
-                            @endif
-                            @if($data->status != 'defaulted')
-                                <li><a data-action="default" class="action-button bg-secondary">Default</a></li>
                             @endif
                             @if($data->status != 'backed_out')
                                 <li><a data-action="backout" class="action-button bg-secondary">Backed-out</a></li>

@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->integer('role')->default(0); // 0 for normal users, 1 for admins
-            $table->string('name');
+            $table->string('firstname');
+            $table->string('middlename');
+            $table->string('lastname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -23,6 +25,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->text('source_of_income')->nullable();
             $table->string('govt_id')->nullable();
+            $table->string('govt_id_type');
             $table->string('selfie_with_id')->nullable();
             $table->string('e_signature')->nullable()->index();
             $table->timestamp('date_banned')->nullable();

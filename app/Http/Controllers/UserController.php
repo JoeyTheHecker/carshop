@@ -32,7 +32,9 @@ class UserController extends Controller
     {
 
          $request->validate([
-            'name' => 'required|string|max:255|min:1',
+            'firstname' => 'required|string|max:255|min:1',
+            'middlename' => 'required|string|max:255|min:1',
+            'lastname' => 'required|string|max:255|min:1',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'mobile_number' => 'required|string|max:255|min:1',
@@ -40,6 +42,7 @@ class UserController extends Controller
             'address' => 'required|string|max:255',
             'source_of_income' => 'required|string|max:255',
             'govt_id' => 'required|image|mimes:jpg,jpeg,gif,png',
+            'govt_id_type' => 'required|string|max:255|min:1',
             'selfie_with_id' => 'required|image|mimes:jpg,jpeg,gif,png',
             'e_signature' => 'required|image|mimes:jpg,jpeg,gif,png',
         ]);
@@ -81,13 +84,16 @@ class UserController extends Controller
         Storage::disk('public')->put('e_signature/' . $imageName_e_signature, file_get_contents($file_e_signature));
 
         $user = new User();
-        $user->name = $request->name;
+        $user->firstname = $request->firstname;
+        $user->middlename = $request->middlename;
+        $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->mobile_number = $request->mobile_number;
         $user->date_of_birth = $request->date_of_birth;
         $user->address = $request->address;
         $user->source_of_income = $request->source_of_income;
+        $user->govt_id_type = $request->govt_id_type;
         // $user->customer_status = (int)$user::PENDING;
         $user->govt_id = (string) $imageName_govt_id;
         $user->selfie_with_id =  (string) $imageName_selfie_with_id;

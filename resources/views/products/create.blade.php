@@ -123,21 +123,21 @@
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name *">
                     </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="unit_name" name="unit_name" placeholder="Unit Name *">
-                    </div>
+                    </div> --}}
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="year_model" name="year_model" placeholder="Year Model">
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="plate_number" name="plate_number" placeholder="Plate Number">
                     </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="classification" name="classification" placeholder="Classification">
-                    </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                    </div> --}}
+                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="is_sold" name="is_sold" placeholder="Is Sold">
-                    </div>
+                    </div> --}}
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="document_status" name="document_status" placeholder="Document Status *">
                     </div>
@@ -153,7 +153,7 @@
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="fuel_type" name="fuel_type" placeholder="Fuel Type">
                     </div>
-                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <select name="product_status" id="product_status" class="form-control">
                             <option value="">Select Status</option>
                             <option value="0">Active</option>
@@ -162,7 +162,7 @@
                             <option value="3">Deleted</option>
                             <!-- <option value="4">For Bidding</option> -->
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="col-sm-12 col-md-12" style="padding-top: 5px; padding-bottom: 5px;">
                         <textarea class="form-control" rows="5" id="descriptions" name="descriptions" placeholder="Descriptions *"></textarea>
                     </div>

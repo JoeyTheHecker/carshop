@@ -16,16 +16,13 @@ return new class extends Migration
             $table->string('product_code')->index();
             $table->string('product_identification_number', 255);
             $table->string('product_name')->index();
-            $table->string('unit_name');
             $table->string('year_model')->index()->nullable();
             $table->longText('descriptions')->nullable();
             $table->string('plate_number')->nullable();
             $table->decimal('inventory_price', 20, 2)->nullable();
             $table->decimal('selling_price', 20, 2)->nullable();
             $table->string('market_value')->nullable();
-            $table->string('is_sold')->index();
             $table->string('latest_condition')->nullable();
-            $table->string('classification')->nullable();
             $table->string('document_status')->nullable();
             $table->tinyInteger('status')->default(0)->index();
             $table->string('image')->nullable();

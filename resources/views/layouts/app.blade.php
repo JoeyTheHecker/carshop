@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" href="{{ URL::asset('images/RFShop-favicon.png') }}" type="image/png">
+  <link rel="shortcut icon" href="" type="image/png">
 
   <title>Authorize User Only</title>
 
@@ -35,7 +35,7 @@
             <!-- This is only visible to small devices -->
             <div class="visible-xs hidden-sm hidden-md hidden-lg">
                 <div class="media userlogged">
-                    <div class="media-body"><h4>{{ Auth::user()->name }}</h4></div>
+                    <div class="media-body"><h4>{{ Auth::user()->lastname }}</h4></div>
                 </div>
                 <h5 class="sidebartitle actitle">Account</h5>
                 <ul class="nav nav-pills nav-stacked nav-bracket mb30">
@@ -91,7 +91,7 @@
                 <li>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->firstname }}
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-usermenu pull-right">

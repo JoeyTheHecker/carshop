@@ -59,7 +59,7 @@
                                     <tr style="cursor: pointer">
                                         <th scope="row">{{$rowNumber}}</th>
                                         <td class="clickable-row" data-id="{{$bid->bidder_id}}">{{ date("d M Y", strtotime($bid->bid_created_at)) }}</td>
-                                        <td class="clickable-row" data-id="{{$bid->bidder_id}}">{{$bid->full_name}}</td>
+                                        <td class="clickable-row" data-id="{{$bid->bidder_id}}">{{$bid->firstname}}</td>
                                         <td class="clickable-row" data-id="{{$bid->bidder_id}}">PHP {{ number_format($bid->amount, 2) }}</td>
                                         <td class="clickable-row" data-id="{{$bid->bidder_id}}">
                                             @switch($bid->bid_status)
