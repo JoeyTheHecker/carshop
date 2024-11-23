@@ -7,17 +7,53 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Products;
 use App\Models\CustomerIntent;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    public function search(){
+    public function search(Request $request){
+        Log::info($request->input('price'));
         $data = array();
 
         $products = new Products();
 
         $query = $products->query();
 
-        $query->where('status', '=', 0)->get();
+        $query->where('status', '=', 0);
+
+         // Check if the 'keyword' parameter is present and not empty
+        if ($request->filled('keyword')) {
+            $keyword = Products::filterInput($request->input('keyword'));
+            $query->where(function ($query) use ($keyword) {
+                $query->where('product_name', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('year_model', '=', 2014)
+                    ->orWhere('product_identification_number', 'LIKE', '%' . $keyword . '%');
+            });
+        }
+
+        if($request->input('price')){
+            if($request->input('price') == 1){
+                $query->where('selling_price', '>=', '0');
+                $query->where('selling_price', '<=', '100000');
+            }elseif($request->input('price') == 2){
+                $query->where('selling_price', '>=', '100001');
+                $query->where('selling_price', '<=', '200000');
+            }elseif($request->input('price') == 3){
+                $query->where('selling_price', '>=', '200001');
+                $query->where('selling_price', '<=', '300000');
+            }elseif($request->input('price') == 4){
+                $query->where('selling_price', '>=', '300001');
+                $query->where('selling_price', '<=', '400000');
+            }elseif($request->input('price') == 5){
+                $query->where('selling_price', '>=', '400001');
+                $query->where('selling_price', '<=', '500000');
+            }elseif($request->input('price') == 6){
+                $query->where('selling_price', '>=', '500001');
+                $query->where('selling_price', '<=', '1000000');
+            }else{
+                $query->where('selling_price', '>=', '1000000');
+            }
+        }
 
         $data = $query->paginate(20);
 

@@ -11,27 +11,28 @@
     <div class="col-span-1">
         <div class="bg-gray-100 p-4 rounded-md shadow-md">
             <!-- Vehicle Search -->
-            <form id="search" data-action="{{ url('api/products') }}">
+            <form id="search" data-action="{{ url('api/products') }}" method="GET">
                 <div class="bg-white shadow-md rounded-md p-4 mb-4">
                     <h2 class="text-xl font-bold mb-4">Vehicle Search</h2>
                     <div class="mb-4">
-                        <label for="price-range" class="block text-sm font-medium">Price Range</label>
-                        <select id="price-range" class="w-full mt-1 p-2 border rounded-md">
-                            <option>₱0 - ₱100,000</option>
-                            <option>₱101,000 - ₱200,000</option>
-                            <option>₱201,000 - ₱300,000</option>
-                            <option>₱301,000 - ₱400,000</option>
-                            <option>₱401,000 - ₱500,000</option>
-                            <option>₱501,000 - ₱1,000,000</option>
-                            <option>₱1,001,000 and Above</option>
+                        <label for="price-range" class="block text-sm font-medium">Price Range</label   >
+                        <select id="price-range" class="w-full mt-1 p-2 border rounded-md" name="price" id="price">
+                            <option value="">Price Range</option>
+                            <option value="1">0 - 100,000</option>
+                            <option value="2">100,001 - 200,000</option>
+                            <option value="3">200,001 - 300,000</option>
+                            <option value="4">300,001 - 400,000</option>
+                            <option value="5">400,001 - 500,000</option>
+                            <option value="6">500,001 - 1,000,000</option>
+                            <option value="7">1M and Above</option>
                         </select>
                     </div>
                     <div class="mb-4">
                         <label for="keyword" class="block text-sm font-medium">Enter Keyword</label>
-                        <input type="text" id="keyword" class="w-full p-2 border rounded-md" name="keyword" placeholder="Enter Keyword">
+                        <input type="text" id="keyword" class="w-full p-2 border rounded-md" name="keyword" placeholder="Enter Keyword" value="">
                     </div>
                     <button id="searchByKeywords" data-url="{{ url('/product/search/?keyword=') }}"
-                        class="w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Search</button>
+                        class="search-btn w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Search</button>
                 </div>
             </form>
 
@@ -61,61 +62,96 @@
 
 <script>
 $(document).ready(function(){
+    // $(document).on('click', '#searchByKeywords', function(e){
+    //     e.preventDefault();
+    //     var cat = $("#cat").val();
+    //     var keyword = $("#keyword").val();
+    //     var price = $("#price").val();
+    //     var brand_name = $("#brand_name").val();
+    //     var location_name = $("#location_name").val();
+    //     var region_name = $("#region").val();
+    //     var url = $("#searchByKeywords").data("url");
+    //     window.location.href = url+''+keyword+'&cat='+cat+'&brand='+brand_name+'&location='+location_name+'&region='+region_name+'&price='+price;
+    // });
 
-/* action URL */
-var url = $("form#search").data("action");
+    /* action URL */
+    var url = $("form#search").data("action");
 
-/* ajax RESULT */
-var result = function(url, data = false) {
-    var data = $("form#search").serialize();
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: data,
-        success: function(data){
-            $('#result').html(data);
-        }
+    /* ajax RESULT */
+    var result = function(url, data = false) {
+        var data = $("form#search").serialize();
+        // Gather form values
+    var keyword = $("#keyword").val();
+    console.log("Keyword: ", keyword); // Log keyword value to console
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: data,
+            success: function(data){
+                $('#result').html(data);
+            }
+        });
+    };
+
+    /* show RESULT by page LOAD */
+    result(url);
+
+    /* click pagination LINK */
+    $(document).on('click', '#pagination-wrapper a', function(e){
+        e.preventDefault();
+        var ahref = $(this).attr('href');
+        var data = $("form#search").serialize();
+
+        result(ahref, data);
+        $('html,body').animate({
+        scrollTop: $("#result").offset().top},
+        'slow');
     });
-};
 
-/* show RESULT by page LOAD */
-result(url);
-
-/* click pagination LINK */
-$(document).on('click', '#pagination-wrapper a', function(e){
-    e.preventDefault();
-    var ahref = $(this).attr('href');
-    var data = $("form#search").serialize();
-
-    result(ahref, data);
-    $('html,body').animate({
-    scrollTop: $("#result").offset().top},
-    'slow');
-});
-
-/* click SEARCH */
-$(document).on('click', 'form#search button.search-btn', function(e){
-    var data = $("form#search").serialize();
-    result(url, data);
-    e.preventDefault();
-});
-
-/* click ENTER KEY */
-$(document).keypress(function(event){
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if(keycode == '13'){
+    /* click SEARCH */
+    $(document).on('click', 'form#search button.search-btn', function(e){
         var data = $("form#search").serialize();
         result(url, data);
-        event.preventDefault();
-    }
+        e.preventDefault();
+    });
+
+    /* click ENTER KEY */
+    $(document).keypress(function(event){
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if(keycode == '13'){
+            var data = $("form#search").serialize();
+            result(url, data);
+            event.preventDefault();
+        }
+    });
+
+    $(document).on('click', 'button.download-btn1', function(e){
+        var url_download = $(this).data("action");
+        var data = $("form#search").serialize();
+        window.open(url_download+"?"+data, "_blank");
+        e.preventDefault();
+    });
+
+/* click ENTER KEY */
+    // $(document).keypress(function(event){
+    //     var keycode = (event.keyCode ? event.keyCode : event.which);
+    //     if(keycode == '13'){
+    //         var cat = $("#cat").val();
+    //         var keyword = $("#keyword").val();
+    //         var price = $("#price").val();
+    //         var brand_name = $("#brand_name").val();
+    //         var location_name = $("#location_name").val();
+    //         var region_name = $("#region").val();
+    //         var url = $("#searchByKeywords").data("url");
+    //         window.location.href = url+''+keyword+'&cat='+cat+'&brand='+brand_name+'&location='+location_name+'&region='+region_name+'&price='+price;
+    //         event.preventDefault();
+    //     }
+    // });
+
+
 });
 
-$(document).on('click', 'button.download-btn1', function(e){
-    var url_download = $(this).data("action");
-    var data = $("form#search").serialize();
-    window.open(url_download+"?"+data, "_blank");
-    e.preventDefault();
-});
-});
+
+
 </script>
 @stop

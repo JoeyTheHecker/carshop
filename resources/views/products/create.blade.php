@@ -30,10 +30,13 @@
                 </div><!-- panel-heading -->
                 <div class="panel-body">
                     <div class="col-sm-12 col-md-12">
+                        <label for="featured_image">Upload Image:</label>
                         <input type="file" class="form-control-file" name="featured_image" id="featured_image">
                     </div>
                     <div class="col-sm-5 col-md-8" style="margin-top: 15px";>
-                        <input type="text" class="form-control" id="featured_video" name="featured_video" placeholder="Paste YouTube URL here">
+                        {{-- <input type="text" class="form-control" id="featured_video" name="featured_video" placeholder="Paste YouTube URL here"> --}}
+                        <label for="featured_video">Upload Video:</label>
+                        <input type="file" name="featured_video" id="featured_video" accept="video/*">
                     </div>
                 </div>
             </div><!-- panel -->
@@ -53,67 +56,6 @@
                 </div>
             </div><!-- panel -->
         </div>
-        {{-- <div class="col-md-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" style="color: blue; margin: 0px;"><b>LOCATION</b></h4>
-                </div><!-- panel-heading -->
-                <div class="panel-body">
-                    <div class="col-sm-3 col-md-3">
-                        <select name="group_id" id="group_id" class="form-control">
-                            <option value="">Group *</option>
-                            @foreach($groups as $g)
-                                <option value="{{ $g->id }}">{{ $g->display }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <!-- <input type="text" class="form-control" id="region_name" name="region_name" placeholder="Region *"> -->
-                        <select name="region_name" id="region_name" class="form-control">
-                            <option value="">Select</option>
-                            <option value="Region I - Ilocos Region">Region I - Ilocos Region</option>
-                            <option value="Region II - Cagayan Valley">Region II - Cagayan Valley</option>
-                            <option value="Region III - Central Luzon">Region III - Central Luzon</option>
-                            <option value="Region IV-A CALABARZON">Region IV-A CALABARZON</option>
-                            <option value="MIMAROPA Region">MIMAROPA Region</option>
-                            <option value="Region V - Bicol Region">Region V - Bicol Region</option>
-                            <option value="Region VI - Western Visayas">Region VI - Western Visayas</option>
-                            <option value="Region VII - Central Visayas">Region VII - Central Visayas</option>
-                            <option value="Region VIII - Eastern Visayas">Region VIII - Eastern Visayas</option>
-                            <option value="Region IX - Zamboanga Penin sula">Region IX - Zamboanga Penin sula</option>
-                            <option value="Region X - Northern Mindanao">Region X - Northern Mindanao</option>
-                            <option value="Region XI - Davao Region">Region XI - Davao Region</option>
-                            <option value="Region XII - SOCCSKSARGEN">Region XII - SOCCSKSARGEN</option>
-                            <option value="Region XIII - Caraga">Region XIII - Caraga</option>
-                            <option value="NCR - National Capital Region">NCR - National Capital Region</option>
-                            <option value="CAR - Cordillera Administrative Region">CAR - Cordillera Administrative Region</option>
-                            <option value="BARMM - Bangsamoro Autonomous Region in Muslim Mindanao">ARMM - Bangsamoro Autonomous Region in Muslim Mindanao</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <input type="text" class="form-control" id="location_name" name="location_name" placeholder="Location *">
-                    </div>
-                    <div class="col-sm-3 col-md-3">
-                        <input type="text" class="form-control" id="origin_barangay" name="origin_barangay" placeholder="Barangay Origin *">
-                    </div>
-                </div>
-            </div><!-- panel -->
-        </div> --}}
-        {{-- <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" style="color: blue; margin: 0px;"><b>PUO DETAILS</b></h4>
-                </div><!-- panel-heading -->
-                <div class="panel-body">
-                    <div class="col-sm-6 col-md-6">
-                        <input type="text" class="form-control" id="puo_date" name="puo_date" autosave="off" autocomplete="off" placeholder="PUO Date *">
-                    </div>
-                    <div class="col-sm-6 col-md-6">
-                        <input type="text" class="form-control" id="puo_number" name="puo_number" placeholder="PUO Number *">
-                    </div>
-                </div>
-            </div><!-- panel -->
-        </div> --}}
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -123,21 +65,12 @@
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name *">
                     </div>
-                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="unit_name" name="unit_name" placeholder="Unit Name *">
-                    </div> --}}
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="year_model" name="year_model" placeholder="Year Model">
                     </div>
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="plate_number" name="plate_number" placeholder="Plate Number">
                     </div>
-                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="classification" name="classification" placeholder="Classification">
-                    </div> --}}
-                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <input type="text" class="form-control" id="is_sold" name="is_sold" placeholder="Is Sold">
-                    </div> --}}
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="document_status" name="document_status" placeholder="Document Status *">
                     </div>
@@ -153,16 +86,13 @@
                     <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
                         <input type="text" class="form-control" id="fuel_type" name="fuel_type" placeholder="Fuel Type">
                     </div>
-                    {{-- <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
-                        <select name="product_status" id="product_status" class="form-control">
-                            <option value="">Select Status</option>
-                            <option value="0">Active</option>
-                            <option value="1">Draft</option>
-                            <option value="2">Sold</option>
-                            <option value="3">Deleted</option>
-                            <!-- <option value="4">For Bidding</option> -->
-                        </select>
-                    </div> --}}
+                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                        <input type="text" class="form-control" id="color" name="color" placeholder="Color">
+                    </div>
+                    <div class="col-sm-3 col-md-3" style="padding-top: 5px; padding-bottom: 5px;">
+                        <input type="text" class="form-control" id="seating_capacity" name="seating_capacity" placeholder="Seating Capacity">
+                    </div>
+
                     <div class="col-sm-12 col-md-12" style="padding-top: 5px; padding-bottom: 5px;">
                         <textarea class="form-control" rows="5" id="descriptions" name="descriptions" placeholder="Descriptions *"></textarea>
                     </div>

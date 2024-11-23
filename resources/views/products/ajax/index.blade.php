@@ -9,10 +9,7 @@
     <table class="table dataTable headerDarkGrey">
         <thead>
             <tr role="row">
-                {{-- <th>Website</th> --}}
-                {{-- <th>Category</th> --}}
                 <th>Status</th>
-                {{-- <th>Group /<br/>Location /<br/> Region Name</th> --}}
                 <th>Product Name</th>
                 <th>Inventory<br/>Price</th>
                 <th>Selling<br/>Price</th>
@@ -24,25 +21,13 @@
             @foreach($data as $d)
             <tr id="div_{{ $d->id }}">
                <!-- <td><img src="./qrcode/{{ $d->id }}.png" style="width: 75px; height: auto;"></td> -->
-                {{-- <td>
-                    <?php
-                        if($d->is_display_on == 1){
-                            echo 'Rfshop';
-                        }elseif($d->is_display_on == 2){
-                            echo 'Carsurplus';
-                        }else{
-                            echo 'Both Rfshop & Carsurplus';
-                        }
-                    ?>
-                </td> --}}
-                {{-- <td>{{ optional($d->getCategory)->name }}</td> --}}
                 <td>
                     <select class="form-control" onchange="changeStatus(this.value, <?php echo $d->id; ?>)">
-                        <option value="<?php echo url('/web/product/change/status/'.$d->id.'/0'); ?>" @if($d->status == 0) selected="Selected" @endif>Active</option>
-                        <option value="<?php echo url('/web/product/change/status/'.$d->id.'/1'); ?>" @if($d->status == 1) selected="Selected" @endif>Draft</option>
-                        <option value="<?php echo url('/web/product/change/status/'.$d->id.'/2'); ?>" @if($d->status == 2) selected="Selected" @endif>Sold</option>
-                        <option value="<?php echo url('/web/product/change/status/'.$d->id.'/3'); ?>" @if($d->status == 3) selected="Selected" @endif>Deleted</option>
-                        <!--<option value="<?php echo url('/web/product/change/status/'.$d->id.'/4'); ?>" @if($d->status == 4) selected="Selected" @endif>For Bidding</option>-->
+                        <option value="<?php echo url('/product/change/status/'.$d->id.'/0'); ?>" @if($d->status == 0) selected="Selected" @endif>Active</option>
+                        <option value="<?php echo url('/product/change/status/'.$d->id.'/1'); ?>" @if($d->status == 1) selected="Selected" @endif>Draft</option>
+                        <option value="<?php echo url('/product/change/status/'.$d->id.'/2'); ?>" @if($d->status == 2) selected="Selected" @endif>Sold</option>
+                        <option value="<?php echo url('/product/change/status/'.$d->id.'/3'); ?>" @if($d->status == 3) selected="Selected" @endif>Deleted</option>
+                        <!--<option value="<?php echo url('/product/change/status/'.$d->id.'/4'); ?>" @if($d->status == 4) selected="Selected" @endif>For Bidding</option>-->
                     </select>
                 </td>
                 {{-- <td>

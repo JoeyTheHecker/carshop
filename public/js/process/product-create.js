@@ -29,7 +29,11 @@ $(document).ready(function(e){
                     $("#submitForm").trigger("reset");
                     $('.alert-success').text(response.message);
                     $('.successHolder').show();
+
                     console.log('success');
+                        setTimeout(function () {
+                            location.reload(); // This refreshes the page
+                        }, 2000);
                 }else{
                     $.each( response.errors, function( key, value ) {
                         $("#"+key).after('<p class="errors text-danger" style="padding-top: 3px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> '+value+'</p>');

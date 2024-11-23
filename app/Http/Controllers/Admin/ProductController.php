@@ -167,6 +167,8 @@ class ProductController extends Controller
             'selling_price' => array('required','regex:'.$regex),
             'market_value' => array('required','regex:'.$regex),
             'min_bid_price' => 'required|numeric|between:0,1',
+            'color' => 'required|string|max:250',
+            'seating_capacity' => 'required|integer',
         );
 
         $data_validate = array_merge($a0, $a1);
@@ -192,6 +194,13 @@ class ProductController extends Controller
             Storage::disk('public')->put('car_images/' . $imageName, file_get_contents($file));
         }
 
+        // Handle the file upload video
+        if ($request->hasFile('featured_video')) {
+            $video = $request->file('featured_video');
+            $featured_video = time() . '_' . $video->getClientOriginalName();
+            $path = $video->storeAs('featured_videos', $featured_video, 'public'); // Save in the 'storage/app/public/videos' directory
+        }
+
         $products->product_code = 0;
         $products->product_identification_number = $request->product_identification_number;
         $products->product_name = (string)$request->product_name;
@@ -206,9 +215,11 @@ class ProductController extends Controller
         $products->market_value = (float)$request->market_value;
         $products->latest_condition = (string)$request->latest_condition;
         $products->document_status = (string)$request->document_status;
+        $products->color = (string)$request->color;
+        $products->seating_capacity = (string)$request->seating_capacity;
         $products->status = 0;
         $products->min_bid_price = $request->min_bid_price;
-        $products->featured_video = $products->getYoutubeVideoId((string)$request->featured_video);
+        $products->featured_video = $featured_video;
         $products->image = (string)$imageName;
         $products->save();
 
@@ -219,4 +230,151 @@ class ProductController extends Controller
 
         return response()->json($response, 200);
     }
+
+    public function productChangeStatus($id, $status)
+    {
+        Products::where('id', '=', (int)$id)->update([
+            'status' => (int)$status,
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+        $response = [
+            'success' => true,
+            'message' => "Data has been updated",
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function viewDetails($id)
+    {
+        $data = array();
+
+        $products = new Products();
+
+        $query = $products->query();
+
+        $query->where('id', '=', (int)$id);
+
+        $data = $query->first();
+
+        return view('products.view')->with('data', $data);
+
+    }
+
+    public function createPut($id)
+    {
+
+        $products = new Products();
+        $productsQuery = $products
+        ->where('id', '=', (int)$id)
+        ->first();
+
+        return view('products.edit')
+        ->with('products', $productsQuery);
+    }
+
+    public function newPut(Request $request)
+    {
+        $regex = "/^(?=.+)(?:[1-9]\d*|0)?(?:\.\d+)?$/";
+
+        if($request->featured_image){
+            $a0 = [
+                'featured_image' => 'required|mimes:jpg,jpeg,gif,png',
+            ];
+        }else{
+            $a0 = [];
+        }
+
+        $a1 = array(
+            'id' => 'required|integer',
+            'product_name' => 'required|string|max:250',
+            'latest_condition' => 'required|string|max:250',
+            'document_status' => 'required|string|max:250',
+            'inventory_price' => array('required','regex:'.$regex),
+            'selling_price' => array('required','regex:'.$regex),
+            'market_value' => array('required','regex:'.$regex),
+            'min_bid_price' => 'required|numeric|between:0,1',
+            'color' => 'required|string|max:250',
+            'seating_capacity' => 'required|integer',
+            'product_status' => 'required|integer',
+        );
+
+        $data_validate = array_merge($a0, $a1);
+
+        $validator = Validator::make($request->all(), $data_validate);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+            exit();
+        }
+
+        $products = new Products();
+
+        if($request->featured_image){
+
+            $file = $request->featured_image;
+            $imageName = $products->generateUniqueID() . '.' . $file->getClientOriginalExtension();
+
+             // Save the file to the 'public/car_images' folder
+            Storage::disk('public')->put('car_images/' . $imageName, file_get_contents($file));
+
+        }
+
+        if($request->featured_image){
+            Products::where('id', '=', (int)$request->id)->update([
+                'image' => (string)$imageName,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            $response = [
+                'success' => true,
+                'message' => "Product has been updated.",
+                'image' => (string)$imageName,
+            ];
+        }else{
+            $response = [
+                'success' => true,
+                'message' => "Product has been updated.",
+            ];
+        }
+
+         // Handle the file upload video
+         if ($request->hasFile('featured_video')) {
+            $video = $request->file('featured_video');
+            $featured_video = time() . '_' . $video->getClientOriginalName();
+            $path = $video->storeAs('featured_videos', $featured_video, 'public'); // Save in the 'storage/app/public/videos' directory
+
+            Products::where('id', '=', (int)$request->id)->update([
+                'featured_video' => (string)$featured_video,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            $response = [
+                'success' => true,
+                'message' => "Product has been updated.",
+            ];
+        }
+        Products::where('id', '=', (int)$request->id)->update([
+            'product_name' => (string)$request->product_name,
+            'year_model' => (int)$request->year_model,
+            'descriptions' => (string)$request->descriptions,
+            'plate_number' => (string)$request->plate_number,
+            'mileage' => (string)$request->mileage,
+            'transmission' => (string)$request->transmission,
+            'fuel_type' => (string)$request->fuel_type,
+            'inventory_price' => (float)$request->inventory_price,
+            'selling_price' => (float)$request->selling_price,
+            'market_value' => (float)$request->market_value,
+            'latest_condition' => (string)$request->latest_condition,
+            'document_status' => (string)$request->document_status,
+            'color' => (string)$request->color,
+            'seating_capacity' => (int)$request->seating_capacity,
+            'status' => (int)$request->product_status,
+            'min_bid_price' => $request->min_bid_price,
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+
+        return response()->json($response, 200);
+    }
+
 }

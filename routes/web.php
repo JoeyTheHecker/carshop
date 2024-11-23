@@ -37,6 +37,11 @@ Route::get('/product/summary/deleted', [App\Http\Controllers\Admin\ProductContro
 Route::get('/product/create', [App\Http\Controllers\Admin\ProductController::class, 'create']);
 Route::post('/product/store', [App\Http\Controllers\Admin\ProductController::class, 'store']);
 
+Route::get('/product/change/status/{id}/{status}', [App\Http\Controllers\Admin\ProductController::class, 'productChangeStatus']);
+Route::get('/product/view/{id}', [App\Http\Controllers\Admin\ProductController::class, 'viewDetails']);
+Route::get('/product/edit/{id}', [App\Http\Controllers\Admin\ProductController::class, 'createPut']);
+Route::post('/product/put', [App\Http\Controllers\Admin\ProductController::class, 'newPut']);
+
 Route::get('/loi', [App\Http\Controllers\Admin\IntentController::class, 'loiSummary']);
 Route::get('/loi/summary', [App\Http\Controllers\Admin\IntentController::class, 'loiAjaxSummary']);
 
@@ -48,8 +53,8 @@ Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::cla
 
 Route::get('/insert-bidding-config', function () {
     DB::table('bidding_config')->insert([
-        'start_day' => 'Fri',
-        'start_hour' => '19',
+        'start_day' => 'Wed',
+        'start_hour' => '18',
         'bidding_hours' => 129,
     ]);
 
