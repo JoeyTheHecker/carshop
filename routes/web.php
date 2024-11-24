@@ -53,8 +53,8 @@ Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::cla
 
 Route::get('/insert-bidding-config', function () {
     DB::table('bidding_config')->insert([
-        'start_day' => 'Wed',
-        'start_hour' => '18',
+        'start_day' => 'Sun',
+        'start_hour' => '10',
         'bidding_hours' => 129,
     ]);
 

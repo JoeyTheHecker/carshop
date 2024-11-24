@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Log;
 class BidsController extends Controller
 {
     public function placeBid(Request $request){
+        date_default_timezone_set('Asia/Singapore');
+
         $request->validate([
             'product_identification_number' => 'required|exists:products,product_identification_number|max:255',
             'product_id' => 'required|exists:products,id|max:255',
@@ -64,7 +66,9 @@ class BidsController extends Controller
         $bid->bidding_cycle_id = Products::isBiddingOpen()->id;
         $bid->product_identification_number = $request->product_identification_number;
         $bid->amount = $request->bid_amount;
-        $bid->full_name = Auth::user()->name;
+        $bid->firstname = Auth::user()->firstname;
+        $bid->middlename = Auth::user()->middlename;
+        $bid->lastname = Auth::user()->lastname;
         $bid->email_add = Auth::user()->email;
         $bid->mobile_number = Auth::user()->mobile_number;
         $bid->birth_date = Auth::user()->date_of_birth;
@@ -79,15 +83,19 @@ class BidsController extends Controller
             $products = new Products();
             $cycle = BiddingCycle::orderBy('id', 'desc')->first();
             $endDate = new \DateTime($cycle->end_date);
-            Log::info('highestBid exist');
-            // MailController::sendMail(
-            //     $highestBid->email_add,
-            //     [
-            //         "product_id" => $request->product_id,
-            //         "product_name" => $products->find($request->product_id)->product_name,
-            //         "time_remaining" => $endDate->diff(new \DateTime())
-            //     ]
-            // );
+            $remaining_time = $endDate->diff(new \DateTime()); // Calculate the time difference
+
+            // Log the remaining time in hours
+            Log::info($remaining_time->format('%h hours'));
+
+            MailController::sendMail(
+                $highestBid->email_add,
+                [
+                    "product_id" => $request->product_id,
+                    "product_name" => $products->find($request->product_id)->product_name,
+                    "time_remaining" => $endDate->diff(new \DateTime())
+                ]
+            );
         }
 
         // MailController::sendReceipt(

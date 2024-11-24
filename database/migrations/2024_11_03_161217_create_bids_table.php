@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('product_id');
             $table->integer('amount');
             $table->string('product_identification_number', 255);
-            $table->string('full_name', 255);
+            $table->string('firstname', 255);
+            $table->string('middlename', 255);
+            $table->string('lastname', 255);
             $table->string('email_add', 255);
             $table->string('mobile_number');
             $table->string('birth_date');

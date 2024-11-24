@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Bids;
 use App\Models\ProductGallery;
+use App\Models\BiddingCycle;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+// use Illuminate\Support\Facades\Request;
 
 class ProductController extends Controller
 {
@@ -15,6 +18,18 @@ class ProductController extends Controller
      */
     public function search(Request $request)
     {
+        date_default_timezone_set('Asia/Singapore');
+        $cycle = BiddingCycle::orderBy('id', 'desc')->first();
+        if ($cycle) { // Ensure $cycle is not null to avoid errors
+            $endDate = new \DateTime($cycle->end_date); // Parse end date
+            $remaining_time = $endDate->diff(new \DateTime()); // Calculate the time difference
+
+            // Log the remaining time in hours
+            Log::info($remaining_time->format('%h hours'));
+        } else {
+            Log::warning('No bidding cycle found.');
+        }
+
         return view('search');
     }
     public function details($id)
