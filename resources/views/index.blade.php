@@ -105,7 +105,7 @@
 </div>
 
 <!-- Download Section -->
-<section class="container mx-auto px-4 py-12 bg-gray-200">
+<section class="container mx-auto py-12 bg-gray-200 w-full">
 <div class="text-center">
     <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Download our Complete Price List</h3>
     <p class="text-gray-700 dark:text-gray-300 mt-2">Click the button below to get the complete price list in

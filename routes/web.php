@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\DB;
 
 Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
 
+Route::get('/mail', function () {
+    return view('mails.outbid');
+});
+
+Route::get('/faq', function () {
+    return view('faq');
+});
 
 Route::resource('vehicles', VehicleController::class);
 
@@ -74,3 +81,18 @@ Route::get('/bidding/info/{id}/cycle/{cycle_id}/bidder/{bid_id}', [App\Http\Cont
 Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/sold', [App\Http\Controllers\Admin\BiddingController::class, 'productSold'])->name('product.sold');
 Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/backout', [App\Http\Controllers\Admin\BiddingController::class, 'backOutBid'])->name('bid.backout');
 Route::post('/bidding/info/{product_id}/cycle/{cycle_id}/bidder/{bid_id}/ban_user', [App\Http\Controllers\Admin\BiddingController::class, 'banUser'])->name('user.ban');
+
+//bidder-account
+// Route::get('/bidder-accounts', 'Web\BiddersController@indexSummary');
+// Route::get('/bidder/view/{id}', 'Web\BiddersController@viewDetails');
+// Route::get('/bidder/upload/{id}', 'Web\BiddersController@uploadFile');
+// Route::get('/bidder/profile/edit/{id}', 'Web\BiddersController@editBidder');
+
+Route::get('bidder-accounts', [App\Http\Controllers\Admin\BidderController::class, 'indexSummary']);
+Route::get('/bidder/view/{id}', [App\Http\Controllers\Admin\BidderController::class, 'viewDetails']);
+
+Route::get('/bidder/summary/pending', [App\Http\Controllers\Admin\BidderController::class, 'ajaxSummaryPending']);
+Route::get('/bidder/summary/approved', [App\Http\Controllers\Admin\BidderController::class, 'ajaxSummaryApproved']);
+
+Route::post('/bidder/put', [App\Http\Controllers\Admin\BidderController::class, 'bidderPut']);
+

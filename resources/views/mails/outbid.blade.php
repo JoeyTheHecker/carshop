@@ -14,7 +14,7 @@
         }
 
       a {
-        color: inherit;
+        color: white;
         text-decoration: none;
         letter-spacing: 0.5px;
         margin: 0 4px;
@@ -78,13 +78,10 @@
             line-height: 36px;
 
         }
-      .red {
-        color: #0174da;
-      }
         .button {
             padding: 8px 24px;
-            background-color: red;
-            color: black;
+            background-color: rgba(247, 192, 192, 0.911);
+            color: white;
             letter-spacing: 1px;
             text-decoration: none;
 
@@ -92,6 +89,10 @@
             margin: 16px auto 8px;
             display: block; width: auto;
         }
+        a:visited {
+        color: white;
+        text-decoration: none;
+    }
     </style>
 
 </head>
@@ -111,9 +112,8 @@
             <p style="text-align:center;">Your bid on {{$data['product_name']}} has been outbid.</p>
             <p style="text-align:center;">{{$data['remaining_time']}}</p>
             <div >
-                {{-- <p style="text-align:center;"><b>Redirect to<a href="https://rfshop.com.ph/">rfshop<span class="red">.com.ph</span></a></b></p> --}}
                 <div>
-                    <a class="button" href="http://{{ $data['server_ip'] }}:8000/product/details/{{$data['product_id']}}">Place new bid</a>
+                    <a class="button" style="font: bold" href="http://192.168.100.27:8000/product/details/{{$data['product_id']}}">Place new bid</a>
                 </div>
             </div>
         </div>

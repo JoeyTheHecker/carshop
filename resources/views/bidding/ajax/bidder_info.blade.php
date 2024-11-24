@@ -71,9 +71,9 @@
                 </div>
             </div>
             <div style="display:flex; justify-content: end;  gap: 5px;" class="mt-3">
-                <a class="btn btn-default" href="{{ 'http://127.0.0.1:8000/storage/e_signature/' . $data->e_signature }}" target="_blank">View e-signature</a>
-                <a class="btn btn-default" href="{{ 'http://127.0.0.1:8000/storage/govt_id/' . $data->govt_id}}" target="_blank">View govt. ID (with address)</a>
-                <a class="btn btn-default" href="{{ 'http://127.0.0.1:8000/storage/selfie_id/' . $data->selfie_with_id}}" target="_blank">View selfie with ID</a>
+                <a class="btn btn-default" href="{{ asset('storage/e_signature/' . $data->e_signature) }}" target="_blank">View e-signature</a>
+                <a class="btn btn-default" href="{{ asset('storage/govt_id/' . $data->govt_id) }}" target="_blank">View govt. ID</a>
+                <a class="btn btn-default" href="{{ asset('storage/selfie_id/' . $data->selfie_with_id) }}" target="_blank">View selfie with ID</a>
             </div>
         </div>
     </div>

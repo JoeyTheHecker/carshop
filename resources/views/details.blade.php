@@ -6,7 +6,7 @@
     <span class="font-medium">Intent has successfuly been send.</span>
   </div>
 
-  @if(session('status'))
+@if(session('status'))
     <div class="alert" role="alert" style="background-color: #86efac">
     <p class="mb-0 text-center">{{session('status')}}</p>
     </div>

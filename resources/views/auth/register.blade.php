@@ -14,6 +14,11 @@
                     </ul>
                 </div>
             @endif
+            @if(session('status'))
+            <div class="alert" role="alert" style="background-color: #86efac">
+            <p class="mb-0 text-center">{{session('status')}}</p>
+            </div>
+            @endif
             <div class="p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6">
                 <h1
                     class="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-center text-gray-900 dark:text-white">
@@ -158,7 +163,7 @@
                         Create an account
                     </button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400 text-center">
-                        Already have an account? <a href="login.html"
+                        Already have an account? <a href="{{ route('login') }}"
                             class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                             here</a>
                     </p>

@@ -41,4 +41,34 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    const PENDING = 0;
+    const APPROVED = 1;
+
+    public function countBidder($status){
+
+        if($status == 0){
+            $result = self::where('customer_status', (int)$status)->count();
+        }else{
+            $result = self::where('customer_status', (int)$status)->count();
+        }
+
+        if($result){
+            return $result;
+        }
+
+        return 0;
+    }
+
+    public function isStatusBidder()
+    {
+        if($this->customer_status == self::PENDING){
+            return 'Pending';
+        }elseif($this->customer_status == self::APPROVED){
+            return 'Approved';
+        }else{
+            return 'None';
+        }
+    }
+
 }

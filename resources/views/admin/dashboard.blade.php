@@ -20,6 +20,7 @@
                             <div class="col-xs-9">
                                 <small class="stat-label">New Inquiry (Today)</small>
                                 {{-- <h1>{{ $data['newInquiry'] }}</h1> --}}
+                                <h1>0</h1>
                             </div>
                         </div><!-- row -->
                         <div class="mb15"></div>
@@ -33,7 +34,7 @@
                     <div class="stat">
                         <div class="row">
                             <div class="col-xs-9">
-                                <small class="stat-label">Total Active</small>
+                                <small class="stat-label">Total Active Cars</small>
                                 <h1>{{ $data['totalActive'] }}</h1>
                             </div>
                         </div><!-- row -->
@@ -48,7 +49,7 @@
                     <div class="stat">
                         <div class="row">
                             <div class="col-xs-9">
-                                <small class="stat-label">Total Sold</small>
+                                <small class="stat-label">Total Sold Cars</small>
                                 <h1>{{ $data['totalSold'] }}</h1>
                             </div>
                         </div><!-- row -->
@@ -63,7 +64,7 @@
                     <div class="stat">
                         <div class="row">
                             <div class="col-xs-9">
-                                <small class="stat-label">Total Deleted</small>
+                                <small class="stat-label">Total Deleted Cars</small>
                                 <h1>{{ $data['totalInactive'] }}</h1>
                             </div>
                         </div><!-- row -->

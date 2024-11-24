@@ -94,7 +94,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->source_of_income = $request->source_of_income;
         $user->govt_id_type = $request->govt_id_type;
-        // $user->customer_status = (int)$user::PENDING;
+        $user->customer_status = (int)$user::PENDING;
         $user->govt_id = (string) $imageName_govt_id;
         $user->selfie_with_id =  (string) $imageName_selfie_with_id;
         $user->e_signature =  (string) $imageName_e_signature;
@@ -103,13 +103,12 @@ class UserController extends Controller
         MailController::sendPendingApproval(
             $request->email,
             [
-                "name" => $request->name,
-                "attachment" => $request->attachment,
+                "firstname" => $request->firstname,
             ]
         );
 
 
-         return redirect('/register')->with('status', 'Registration successful! Your account is pending approval. Please check your email for the approval status.');
+         return redirect()->back()->with('status', 'Registration successful! Your account is pending approval. Please check your email for the approval status.');
 
           // Log the user in
         // Auth::login($user);

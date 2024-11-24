@@ -58,15 +58,15 @@
                 </li>
                 {{-- <li><a href="{{ url('/pricelists') }}"><i class="fa fa-download"></i> Price Lists</a></li>
                 <li><a href="{{ url('/inquiry') }}"><i class="fa fa-pencil"></i> Inquiry</a></li>
-                <li><a href="{{ url('/subscribers') }}"><i class="fa fa-folder"></i> Subscribers</a></li>
+                <li><a href="{{ url('/subscribers') }}"><i class="fa fa-folder"></i> Subscribers</a></li> --}}
 
                 <li class="nav-parent"><a href="#"><i class="fa fa-truck"></i>Bidder Accounts</a>
                     <ul class="children" style="display: block;">
                         <li><a href="{{ url('/bidder-accounts#tab1') }}" data-hash="isActive">- Pending</a></li>
                         <li><a href="{{ url('/bidder-accounts#tab2') }}" data-hash="isSold">- Approved</a></li>
                     </ul>
-                </li>  --}}
-                <li><a href="{{ url('/intent') }}"><i class="fa fa-book"></i> Bidder Lists</a></li>
+                </li>
+                {{-- <li><a href="{{ url('/intent') }}"><i class="fa fa-book"></i> Bidder Lists</a></li> --}}
                 <li><a href="{{ url('/bidding') }}"><i class="fa fa-book"></i> Bidding Lists</a></li>
                 <li><a href="{{ url('/loi') }}"><i class="fa fa-folder-open-o"></i> LOI Lists</a></li>
                 <!-- @if(Auth::user()->role_id == 0)

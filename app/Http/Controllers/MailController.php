@@ -7,6 +7,7 @@ use App\Mail\OutbidMail;
 use App\Mail\ReceiptMail;
 use App\Mail\pendingApprovalMail;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyApprovedMail;
 
 class MailController extends Controller
 {
@@ -28,8 +29,12 @@ class MailController extends Controller
     // }
     public static function sendPendingApproval($address,$data)
     {
-        // aadd.loi@rfc.com.p
-        // Mail::to($address)->send(new pendingApprovalMail($data));
-        // return;
+        Mail::to($address)->send(new pendingApprovalMail($data));
+        return;
+    }
+
+    public static function sendNotifApproved($address, $data)
+    {
+        Mail::to($address)->send(new NotifyApprovedMail($data));
     }
 }
