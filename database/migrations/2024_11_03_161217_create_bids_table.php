@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('mobile_number');
             $table->string('birth_date');
             $table->text('address');
-            $table->text('source_of_income');
+            // $table->text('source_of_income');
             $table->string('e_signature');
             $table->string('govt_id');
             $table->string('selfie_with_id');

@@ -48,14 +48,14 @@
                         aria-describedby="birth_date">
                 </div>
             </div>
-            <div class="col-12 mt-3">
+            {{-- <div class="col-12 mt-3">
                 <div class="input-group" style="width: 100%">
                     <span class="input-group-addon" id="source_of_income"
                         style="min-width: 30%; text-align: start;">Source of income</span>
                     <input type="text" readonly value="{{$data->source_of_income}}" class="form-control"
                         id="source_of_income" aria-describedby="source_of_income">
                 </div>
-            </div>
+            </div> --}}
             <div class="col-12 mt-3">
                 <div class="input-group" style="width: 100%">
                     <span class="input-group-addon" id="company_name" style="min-width: 30%; text-align: start;">Company

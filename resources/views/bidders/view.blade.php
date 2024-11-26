@@ -52,10 +52,10 @@
                         <label class="f-width">Address</label>
                         <b class="f-width-w-border-bottom">{{ $data->address }}</b>
                     </div>
-                    <div class="col-sm-6 col-md-6 pt-20">
+                    {{-- <div class="col-sm-6 col-md-6 pt-20">
                         <label class="f-width">Source of Income</label>
                         <b class="f-width-w-border-bottom">{{ $data->source_of_income }}</b>
-                    </div>
+                    </div> --}}
                     {{-- <div class="col-sm-6 col-md-6 pt-20">
                         <label class="f-width">Company Name</label>
                         <b class="f-width-w-border-bottom">{{ $data->company_name }}</b>

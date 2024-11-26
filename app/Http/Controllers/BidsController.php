@@ -73,7 +73,7 @@ class BidsController extends Controller
         $bid->mobile_number = Auth::user()->mobile_number;
         $bid->birth_date = Auth::user()->date_of_birth;
         $bid->address = Auth::user()->address;
-        $bid->source_of_income = Auth::user()->source_of_income;
+        // $bid->source_of_income = Auth::user()->source_of_income;
         $bid->e_signature = Auth::user()->e_signature;
         $bid->govt_id = Auth::user()->govt_id;
         $bid->selfie_with_id = Auth::user()->selfie_with_id;

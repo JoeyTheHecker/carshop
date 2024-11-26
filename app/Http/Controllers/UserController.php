@@ -40,7 +40,7 @@ class UserController extends Controller
             'mobile_number' => 'required|string|max:255|min:1',
             'date_of_birth' => 'required|string|max:255|min:1',
             'address' => 'required|string|max:255',
-            'source_of_income' => 'required|string|max:255',
+            // 'source_of_income' => 'required|string|max:255',
             'govt_id' => 'required|image|mimes:jpg,jpeg,gif,png',
             'govt_id_type' => 'required|string|max:255|min:1',
             'selfie_with_id' => 'required|image|mimes:jpg,jpeg,gif,png',
@@ -92,7 +92,7 @@ class UserController extends Controller
         $user->mobile_number = $request->mobile_number;
         $user->date_of_birth = $request->date_of_birth;
         $user->address = $request->address;
-        $user->source_of_income = $request->source_of_income;
+        // $user->source_of_income = $request->source_of_income;
         $user->govt_id_type = $request->govt_id_type;
         $user->customer_status = (int)$user::PENDING;
         $user->govt_id = (string) $imageName_govt_id;
