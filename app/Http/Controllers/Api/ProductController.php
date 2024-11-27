@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Products;
 use App\Models\CustomerIntent;
 use Illuminate\Support\Facades\Log;
+use App\Models\Inquiry;
 
 class ProductController extends Controller
 {
@@ -92,6 +93,45 @@ class ProductController extends Controller
         $cusIntentSave->save();
 
         if($cusIntentSave){
+            $response = [
+                'success' => true
+            ];
+        }else{
+            $response = [
+                'success' => false,
+                'message' => "Cannot process the transaction right now...",
+            ];
+        }
+
+        return response()->json($response, 200);
+    }
+
+    public function postInquiry(Request $request)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'mobile_number' => 'required',
+            'message' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+            exit();
+        }
+
+        $inquirySve = new Inquiry();
+        $inquirySve->product_id = $request->product_id;
+        $inquirySve->name = $request->name;
+        $inquirySve->email = $request->email;
+        $inquirySve->mobile_number = $request->mobile_number;
+        $inquirySve->message = $request->message;
+        $inquirySve->status = Inquiry::STATUS_ACTIVE;
+        $inquirySve->save();
+
+        if($inquirySve){
             $response = [
                 'success' => true
             ];

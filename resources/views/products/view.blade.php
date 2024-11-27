@@ -9,7 +9,7 @@
     <h2>Cars</h2>
     <h3>Product ID: {{ $data->product_identification_number }}</h3>
     <div class="breadcrumb-wrapper">
-        <span class="label"><a href="{{ url('/product') }}">BACK</a></span>
+        <span class="label"><a href="javascript:history.back()">BACK</a></span>
     </div>
 </div>
 

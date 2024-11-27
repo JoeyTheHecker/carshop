@@ -1,40 +1,38 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="grid grid-cols-1 gap-4 px-4 mx-auto max-w-screen-xl py-8 md:grid-cols-2 lg:grid-cols-3">
-    <!-- Vehicle Listings Section -->
-    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 col-span-2" id="result">
-        <img src="{{ URL::asset('images/loaders/loader10.gif') }}" alt="Loading..." title="Loading..."> Loading...
-    </div>
+<div class="bg-gray-50 text-gray-800">
+    <!-- Contact Us Section -->
+    <section class="bg-cover bg-center bg-no-repeat py-10 px-6 shadow-md h-60 md:h-80 relative"
+        style="background-image: url('{{ asset('images/red-toyota-camry-xse-zp9qu4a3scmlefal.jpg') }}');">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div> <!-- Dark overlay for contrast -->
+        <div class="relative max-w-6xl mx-auto p-6">
+            <h2 class="text-4xl font-extrabold mb-6 text-white">Contact Us</h2>
+            <div class="grid grid-cols-1 gap-4">
+                <p class="text-lg text-white flex items-center">
+                    <span class="mr-2">📞</span> 09123456789
+                </p>
+                <p class="text-lg text-white flex items-center">
+                    <span class="mr-2">📧</span> toyotatacloban@gmail.com
+                </p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Search and Recommendations Section -->
-    <div class="col-span-1">
-        <div class="bg-gray-100 p-4 rounded-md shadow-md">
-            <!-- Vehicle Search -->
-            <form id="search" data-action="{{ url('api/products') }}" method="GET">
-                <div class="bg-white shadow-md rounded-md p-4 mb-4">
-                    <h2 class="text-xl font-bold mb-4">Vehicle Search</h2>
-                    <div class="mb-4">
-                        <label for="price-range" class="block text-sm font-medium">Price Range</label   >
-                        <select id="price-range" class="w-full mt-1 p-2 border rounded-md" name="price" id="price">
-                            <option value="">Price Range</option>
-                            <option value="1">0 - 100,000</option>
-                            <option value="2">100,001 - 200,000</option>
-                            <option value="3">200,001 - 300,000</option>
-                            <option value="4">300,001 - 400,000</option>
-                            <option value="5">400,001 - 500,000</option>
-                            <option value="6">500,001 - 1,000,000</option>
-                            <option value="7">1M and Above</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="keyword" class="block text-sm font-medium">Enter Keyword</label>
-                        <input type="text" id="keyword" class="w-full p-2 border rounded-md" name="keyword" placeholder="Enter Keyword" value="">
-                    </div>
-                    <button id="searchByKeywords" data-url="{{ url('/product/search/?keyword=') }}"
-                        class="search-btn w-full text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Search</button>
+    <!-- Head Office and Contact Form Section -->
+    <section class="py-12 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Head Office Column -->
+            <div>
+                <h2 class="text-3xl font-extrabold mb-6 text-gray-900">Head Office</h2>
+                <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                    📍 Maharlika Highway, Brgy. 71 Naga-Naga, Tacloban City 6500, Leyte, Philippines
+                </p>
+                <div
+                    class="bg-gray-300 h-64 flex items-center justify-center rounded-lg shadow-md text-gray-500 text-xl">
+                    <span>Map Placeholder</span>
                 </div>
-            </form>
+            </div>
 
             <!-- Inquiry Form -->
             <div class="bg-white shadow-md rounded-md p-4">
@@ -59,14 +57,10 @@
                         Inquiry</button>
                 </form>
             </div>
+
         </div>
-
-
-    </div>
+    </section>
 </div>
-
-
-
 <div class="block space-y-4 md:flex md:space-y-0 md:space-x-4 rtl:space-x-reverse">
     <!-- Modal toggle -->
     <button id="trigger-button" data-modal-target="small-modal" data-modal-toggle="small-modal" class="block w-full md:w-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" style="display: none">
@@ -92,78 +86,11 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('javascript')
- <!-- <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script> -->
- <script src="https://code.jquery.com/jquery-3.6.4.min.js"
- integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-{{-- <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script> --}}
-
 <script>
-$(document).ready(function(){
-
-    /* action URL */
-    var url = $("form#search").data("action");
-
-    /* ajax RESULT */
-    var result = function(url, data = false) {
-        var data = $("form#search").serialize();
-        // Gather form values
-    var keyword = $("#keyword").val();
-    console.log("Keyword: ", keyword); // Log keyword value to console
-        $.ajax({
-            url: url,
-            type: "GET",
-            data: data,
-            success: function(data){
-                $('#result').html(data);
-            }
-        });
-    };
-
-    /* show RESULT by page LOAD */
-    result(url);
-
-    /* click pagination LINK */
-    $(document).on('click', '#pagination-wrapper a', function(e){
-        e.preventDefault();
-        var ahref = $(this).attr('href');
-        var data = $("form#search").serialize();
-
-        result(ahref, data);
-        $('html,body').animate({
-        scrollTop: $("#result").offset().top},
-        'slow');
-    });
-
-    /* click SEARCH */
-    $(document).on('click', 'form#search button.search-btn', function(e){
-        var data = $("form#search").serialize();
-        result(url, data);
-        e.preventDefault();
-    });
-
-    /* click ENTER KEY */
-    $(document).keypress(function(event){
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if(keycode == '13'){
-            var data = $("form#search").serialize();
-            result(url, data);
-            event.preventDefault();
-        }
-    });
-
-    $(document).on('click', 'button.download-btn1', function(e){
-        var url_download = $(this).data("action");
-        var data = $("form#search").serialize();
-        window.open(url_download+"?"+data, "_blank");
-        e.preventDefault();
-    });
-});
-
-$(document).ready(function() {
+    $(document).ready(function() {
     $(document).on('submit', '#inquiryForm', function(){
 
         var url = $("form#inquiryForm").prop("action");

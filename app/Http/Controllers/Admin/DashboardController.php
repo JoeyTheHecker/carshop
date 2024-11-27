@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\Inquiry;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -13,9 +14,9 @@ class DashboardController extends Controller
         $data = array();
 
         $products = new Products();
-        // $inquiry = new Inquiry();
+        $inquiry = new Inquiry();
 
-        // $data['newInquiry'] = $inquiry->ctrInquiryToday();
+        $data['newInquiry'] = $inquiry->ctrInquiryToday();
         $data['totalActive'] = $products->ctrProducts($products::STATUS_ACTIVE);
         $data['totalSold'] = $products->ctrProducts($products::STATUS_SOLD);
         $data['totalInactive'] = $products->ctrProducts($products::STATUS_INACTIVE);

@@ -19,8 +19,7 @@
                         <div class="row">
                             <div class="col-xs-9">
                                 <small class="stat-label">New Inquiry (Today)</small>
-                                {{-- <h1>{{ $data['newInquiry'] }}</h1> --}}
-                                <h1>0</h1>
+                                <h1>{{ $data['newInquiry'] }}</h1>
                             </div>
                         </div><!-- row -->
                         <div class="mb15"></div>

@@ -149,4 +149,72 @@ class Products extends Model
 
         return $data;
     }
+    public function hotBids($limit)
+    {
+        $subquery = DB::table('bidding_cycles')
+            ->select('id')
+            ->where('is_open', 1)
+            ->orderByDesc('id')
+            ->limit(1);
+
+        // Main query
+        $userId = auth()->id(); // Assuming you're using Laravel's authentication to get the logged-in user's ID
+
+    $query = self::query()
+        ->select(
+            'products.id',
+            'products.product_identification_number',
+            'products.product_name',
+            'products.image',
+            DB::raw('COUNT(DISTINCT bids.customer_id) AS bidders_count'),
+            DB::raw('COUNT(bids.id) AS bid_count')
+        )
+        ->leftJoin('bids', 'products.id', '=', 'bids.product_id')
+        ->where('bids.bidding_cycle_id', '=', $subquery) // Filter by bidding cycle
+        ->where('bids.customer_id', '=', $userId) // Add condition for logged-in user
+        ->whereRaw('bids.created_at = (SELECT MAX(b.created_at) FROM bids b WHERE b.product_id = bids.product_id AND b.customer_id = bids.customer_id)') // Get the latest bid
+        ->groupBy('products.id', 'products.product_identification_number', 'products.product_name','products.image')
+        ->orderByDesc('bid_count')
+        ->limit($limit);
+
+    return $query->get();
+
+
+
+    }
+
+    public function winningBids($limit)
+    {
+        // Subquery to get the latest closed bidding cycle id
+        $subqueryResult = DB::table('bidding_cycles')
+            ->select('id')
+            ->where('is_open', 0)
+            ->orderBy('id', 'desc')
+            ->limit(1)
+            ->value('id');
+
+        if(!$subqueryResult){
+            return [];
+        }
+        // Main query
+        $query = self::query()
+            ->select('products.*', DB::raw('b.top_bid_amount'))
+            ->leftJoin(
+                DB::raw(
+                    '(SELECT product_id, MAX(amount) AS top_bid_amount
+                              FROM bids
+                              WHERE bidding_cycle_id = ' . $subqueryResult . '
+                              GROUP BY product_id) AS b'
+                ),
+                'products.id',
+                '=',
+                'b.product_id'
+            )
+            ->orderByDesc('b.top_bid_amount')
+            ->limit($limit);
+
+        return $query->get();
+    }
+
+
 }

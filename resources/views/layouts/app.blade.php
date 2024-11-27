@@ -56,9 +56,9 @@
                         <li><a href="{{ url('/product#tab4') }}" data-hash="isDeleted">- Deleted</a></li>
                     </ul>
                 </li>
-                {{-- <li><a href="{{ url('/pricelists') }}"><i class="fa fa-download"></i> Price Lists</a></li>
+                {{-- <li><a href="{{ url('/pricelists') }}"><i class="fa fa-download"></i> Price Lists</a></li> --}}
                 <li><a href="{{ url('/inquiry') }}"><i class="fa fa-pencil"></i> Inquiry</a></li>
-                <li><a href="{{ url('/subscribers') }}"><i class="fa fa-folder"></i> Subscribers</a></li> --}}
+                {{-- <li><a href="{{ url('/subscribers') }}"><i class="fa fa-folder"></i> Subscribers</a></li> --}}
 
                 <li class="nav-parent"><a href="#"><i class="fa fa-truck"></i>Bidder Accounts</a>
                     <ul class="children" style="display: block;">

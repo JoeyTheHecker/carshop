@@ -26,6 +26,9 @@ Route::get('/faq', function () {
     return view('faq');
 });
 
+Route::get('/contact-us', function () {
+    return view('contact_us');
+});
 Route::resource('vehicles', VehicleController::class);
 
 
@@ -60,8 +63,8 @@ Route::get('/product/details/{id}', [App\Http\Controllers\ProductController::cla
 
 Route::get('/insert-bidding-config', function () {
     DB::table('bidding_config')->insert([
-        'start_day' => 'Sun',
-        'start_hour' => '10',
+        'start_day' => 'Wed',
+        'start_hour' => '11',
         'bidding_hours' => 129,
     ]);
 
@@ -69,6 +72,7 @@ Route::get('/insert-bidding-config', function () {
 });
 
 Route::post('/user/store', [App\Http\Controllers\UserController::class, 'store'])->name('user-store');
+Route::get('/users/{id}', [App\Http\Controllers\UserController::class, 'show'])->name('user-show');
 
 Route::post('/product/details/{id}', [App\Http\Controllers\BidsController::class, 'placeBid'])->name('place-bid');
 
@@ -95,4 +99,12 @@ Route::get('/bidder/summary/pending', [App\Http\Controllers\Admin\BidderControll
 Route::get('/bidder/summary/approved', [App\Http\Controllers\Admin\BidderController::class, 'ajaxSummaryApproved']);
 
 Route::post('/bidder/put', [App\Http\Controllers\Admin\BidderController::class, 'bidderPut']);
+
+Route::get('/inquiry', [App\Http\Controllers\Admin\InquiryController::class, 'indexSummary']);
+Route::get('/inquiry/summary', [App\Http\Controllers\Admin\InquiryController::class, 'inquiryAjaxSummary']);
+
+Route::get('/inquiry/view/{id}', [App\Http\Controllers\Admin\InquiryController::class, 'viewDetails']);
+
+
+
 
