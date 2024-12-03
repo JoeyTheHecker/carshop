@@ -19,6 +19,7 @@
             <p class="mb-0 text-center">{{session('status')}}</p>
             </div>
             @endif
+            <div id="result2"></div>
             <div class="p-4 sm:p-6 md:p-8 space-y-4 md:space-y-6">
                 <h1
                     class="text-xl sm:text-2xl font-bold leading-tight tracking-tight text-center text-gray-900 dark:text-white">
@@ -222,7 +223,7 @@
         return;
       }
 
-        // Disable the button and change its text to "Loading..."
+        // // Disable the button and change its text to "Loading..."
         submitButton.disabled = true;
         submitButton.textContent = "Loading...";
 
@@ -233,20 +234,88 @@
       const result = checkEmailExistence(apiResponse);
 
       // Display result
-      if (result.status === "success") {
-        resultDiv.innerHTML = `<span style="color:green">${result.message}</span>`;
-            setTimeout(() => {
-        form.submit(); // Automatically submit the form after success
-        }, 2000); // Optional delay for user to see the message
-      } else if (result.status === "error") {
+      if (result.status === "error") {
         resultDiv.innerHTML = `<span style="color:red">${result.message}</span>`;
         submitButton.disabled = false; // Re-enable the button
         submitButton.textContent = "Create an account"; // Reset button text
-      } else {
-        resultDiv.innerHTML = `<span style="color:red">${result.message}</span>`;
-        submitButton.disabled = false; // Re-enable the button
-        submitButton.textContent = "Create an account"; // Reset button text
+        return;
       }
+
+    //   ******VERIFY ID**********
+        const image1 = document.getElementById('govt_id').files[0];
+        const image2 = document.getElementById('selfie_with_id').files[0];
+
+        if (!image1 || !image2) {
+            alert("Please upload both images.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('photo1', image1, image1.name); // Adjust keys if API expects 'govt_id' and 'selfie_with_id'
+        formData.append('photo2', image2, image2.name);
+
+
+        // alert(`Uploaded Files:\nImage 1: ${image1.name}, Size: ${image1.size} bytes\nImage 2: ${image2.name}, Size: ${image2.size} bytes`);
+
+        console.log("Sending FormData:");
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value instanceof File ? value.name : value);
+        }
+        const url = 'https://face-verification2.p.rapidapi.com/FaceVerification';
+        const options = {
+            method: 'POST',
+            headers: {
+                'x-rapidapi-key': 'a6093b363bmsh9da49afd7c00d88p10bf31jsneb17df44f900',
+                'x-rapidapi-host': 'face-verification2.p.rapidapi.com'
+            },
+            body: formData
+        };
+
+        try {
+            const response = await fetch(url, options);
+            const result = await response.json();
+            console.log(result.data.resultMessage);
+            if(result.data.resultIndex != 0){
+                if(result.data.resultMessage == "Face NotFound in first image"){
+                    document.getElementById('result2').innerHTML = `
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">Face NotFound in govt ID image</div>
+            `;
+                submitButton.disabled = false; // Re-enable the button
+                submitButton.textContent = "Create an account"; // Reset button text
+                return;
+                }
+
+                if(result.data.resultMessage == "Face NotFound in second image"){
+                    document.getElementById('result2').innerHTML = `
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">Face NotFound in selfie ID image</div>
+            `;
+                submitButton.disabled = false; // Re-enable the button
+                submitButton.textContent = "Create an account"; // Reset button text
+                return;
+                }
+
+                document.getElementById('result2').innerHTML = `
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">${result.data.resultMessage}</div>
+            `;
+                submitButton.disabled = false; // Re-enable the button
+                submitButton.textContent = "Create an account"; // Reset button text
+                return;
+
+            }
+            // document.getElementById('result2').innerHTML = `
+            //     <div>Result:</div>
+            //     <pre>${JSON.stringify(result, null, 2)}</pre>
+            // `;
+
+        } catch (error) {
+            console.error(error);
+            document.getElementById('result2').textContent = 'An error occurred while processing your request.';
+                submitButton.disabled = false; // Re-enable the button
+                submitButton.textContent = "Create an account"; // Reset button text
+                return;
+        }
+
+        form.submit();
     });
 
     function toggleFileUpload() {
