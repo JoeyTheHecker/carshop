@@ -102,21 +102,26 @@ class UserController extends Controller
         $user->e_signature =  (string) $imageName_e_signature;
         $user->save();
 
-        MailController::sendPendingApproval(
-            $request->email,
-            [
-                "firstname" => $request->firstname,
-            ]
-        );
+        // MailController::sendPendingApproval(
+        //     $request->email,
+        //     [
+        //         "firstname" => $request->firstname,
+        //     ]
+        // );
 
 
-         return redirect()->back()->with('status', 'Registration successful! Your account is pending approval. Please check your email for the approval status.');
+        //  return redirect()->back()->with('status', 'Registration successful! Your account is pending approval. Please check your email for the approval status.');
 
           // Log the user in
-        // Auth::login($user);
+        Auth::login($user);
 
-        // Redirect to the intended route
-        // return redirect()->intended('/');
+        // Send email verification notification
+        if (!$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+        }
+
+        // Redirect to the intended route with a flash message
+        return redirect()->intended('/')->with('message', 'A verification email has been sent to your email address.');
     }
 
     // Display the specified user

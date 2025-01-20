@@ -175,12 +175,12 @@ class BiddingController extends Controller
             ->where('id', $bid_id)
             ->where('bidding_cycle_id', $cycle_id)
             ->where('product_id', $product_id)
-            ->select('customer_id')->first();
+            ->first();
 
         DB::transaction(function () use ($user, $bid_id, $cycle_id, $product_id) {
             DB::table('users')
                 ->where('id', $user->customer_id)
-                ->where('role_id', '2') // user is not an admin
+                // ->where('role_id', '2') // user is not an admin
                 ->update([
                     'date_banned' => date('Y-m-d H:i:s') //user is banned
                 ]);
@@ -192,6 +192,13 @@ class BiddingController extends Controller
                 ->where('product_id', $product_id)
                 ->update(['status' => 'defaulted']);
         });
+
+        MailController::sendNotifBanned(
+            $user->email_add,
+            [
+                "firstname" => $user->firstname,
+            ]
+        );
 
         return response()->json(['message' => 'Success']);
     }

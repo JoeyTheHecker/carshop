@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-
+use App\Http\Controllers\MailController;
+use Illuminate\Http\Request;
 class VerificationController extends Controller
 {
     /*
@@ -25,7 +26,30 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
+
+     /**
+     * Handle what happens after the user verifies their email.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function verified(Request $request)
+    {
+        // Call your MailController to send the email
+        MailController::sendPendingApproval(
+            auth()->user()->email,
+            [
+                "firstname" => auth()->user()->firstname,
+            ]
+        );
+
+        // Optionally, add a success message to the session
+        session()->flash('message', 'Your email has been verified, and a pending approval notification has been sent.');
+
+        // Redirect the user
+        return redirect($this->redirectPath());
+    }
 
     /**
      * Create a new controller instance.

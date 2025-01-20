@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 */
 
 
-Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->middleware('verified');
 
 Route::get('/mail', function () {
     return view('mails.outbid');
@@ -32,8 +33,8 @@ Route::get('/contact-us', function () {
 Route::resource('vehicles', VehicleController::class);
 
 
-Auth::routes();
-
+// Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

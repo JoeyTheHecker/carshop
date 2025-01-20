@@ -90,7 +90,7 @@
         $currentDate = new \DateTime();
     @endphp
 
-    @if($currentDate > $dateBanned || $data->date_banned == null)
+    @if(true)
         <div style="display:flex; justify-content: space-between;">
             <a data-action="ban_user" class="action-button btn btn-danger">Ban user</a>
     @else

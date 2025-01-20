@@ -1,7 +1,11 @@
 @extends('layouts.master')
 
 @section('content')
-
+@if(session('message'))
+        <div class="alert" role="alert" style="background-color: #86efac">
+            <p class="mb-0 text-center">{{session('message')}}</p>
+        </div>
+    @endif
 
 <div id="default-carousel" class="relative w-full" data-carousel="slide" interval: 9000>
     <!-- Carousel wrapper -->

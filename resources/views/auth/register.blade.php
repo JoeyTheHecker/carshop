@@ -76,13 +76,41 @@
                             <input type="date" name="date_of_birth" id="date_of_birth"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         </div>
-                        <div class="md:col-span-2">
-                            <label for="address"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                            <input type="text" name="address" id="address"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Brgy. 84 San Jose, Tacloban City">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <!-- Barangay -->
+                            <div>
+                                <label for="barangay" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                                <input type="text" name="barangay" id="barangay"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Brgy. 84">
+                            </div>
+
+                            <!-- Street -->
+                            <div>
+                                <label for="barangay" class="block mb-2 text-sm font-medium text-white dark:text-white">.</label>
+                                <input type="text" name="street" id="street"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Street">
+                            </div>
+                             <!-- City -->
+                             <div>
+                                <input type="text" name="city" id="city"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="City">
+                            </div>
+
+                            <!-- Province -->
+                            <div>
+                                <input type="text" name="province" id="province"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Province">
+                            </div>
+                                <!-- Hidden Input to Combine Address -->
+                                <input type="hidden" name="address" id="address">
                         </div>
+
+
+
                         {{-- <div>
                             <label for="income"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source of
@@ -174,6 +202,23 @@
 </section>
 
 <script>
+     // Combine address inputs into the hidden field
+    const barangayInput = document.getElementById('barangay');
+    const streetInput = document.getElementById('street');
+    const cityInput = document.getElementById('city');
+    const provinceInput = document.getElementById('province');
+    const addressInput = document.getElementById('address');
+
+    // Update the hidden address input whenever any field changes
+    const updateAddress = () => {
+        addressInput.value = `${barangayInput.value}, ${streetInput.value}, ${cityInput.value}, ${provinceInput.value}`.trim();
+    };
+
+    // Add event listeners to update the hidden input on input change
+    [barangayInput, streetInput, cityInput, provinceInput].forEach(input => {
+        input.addEventListener('input', updateAddress);
+    });
+
     const form = document.getElementById('emailForm');
     const resultDiv = document.getElementById('result');
 

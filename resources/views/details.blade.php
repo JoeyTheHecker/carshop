@@ -311,7 +311,7 @@
 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 <div class="relative p-4 w-1/2 max-h-full">
     <!-- Modal content -->
-    @if (auth()->user())
+    @if (auth()->user()->customer_status == 1)
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -401,6 +401,10 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                     Submit Bid
                 </button>
             </form>
+        </div>
+    @elseif (auth()->user()->customer_status == 0)
+        <div class="flex flex-col items-center justify-center w-full border rounded p-5 bg-white">
+            <p class="text-center mb-2">Your account is pending approval. Please check your email for the approval status</p>
         </div>
     @else
         <div class="flex flex-col items-center justify-center w-full border rounded p-5 bg-white">
