@@ -110,14 +110,6 @@
                         </div>
 
 
-
-                        {{-- <div>
-                            <label for="income"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Source of
-                                Income</label>
-                            <input type="text" name="source_of_income" id="source_of_income"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        </div> --}}
                         <div>
                             <!-- Select Government ID Type -->
                             <label for="govt_id_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -196,7 +188,8 @@
                             class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                             here</a>
                     </p>
-
+                    <x-turnstile />
+                </form>
         </div>
     </div>
 </section>

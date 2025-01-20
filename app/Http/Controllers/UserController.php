@@ -8,7 +8,7 @@ use App\Models\Products;
 use App\Models\BiddingCycle;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\Rule;
 class UserController extends Controller
 {
     /**
@@ -47,6 +47,7 @@ class UserController extends Controller
             'govt_id_type' => 'required|string|max:255|min:1',
             'selfie_with_id' => 'required|image|mimes:jpg,jpeg,gif,png',
             'e_signature' => 'required|image|mimes:jpg,jpeg,gif,png',
+            'cf-turnstile-response' => ['required', Rule::turnstile()],
         ]);
 
         $imageName_govt_id = null;
