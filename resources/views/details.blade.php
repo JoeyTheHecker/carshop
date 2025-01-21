@@ -269,9 +269,10 @@
                             <label for="email"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
                                 Address</label>
-                            <input type="email" name="customer_email" id="email"
+                            <input type="email" name="customer_email" id="customer_email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="name@company.com" required="">
+                                <div id="result"></div>
                         </div>
                         <div class="col-span-2">
                             <label for="address"
@@ -297,10 +298,11 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="PHP 999,9999" required="">
                         </div>
-                        <button
-                            class="col-span-2 text-white bg-red-800 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            Submit Intent
-                        </button>
+                        <button id="submitIntentButton" disabled
+    class="col-span-2 text-white bg-gray-400 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800
+">
+    Submit Intent
+</button>
                 </form>
             </div>
         </div>
@@ -311,7 +313,7 @@
 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 <div class="relative p-4 w-1/2 max-h-full">
     <!-- Modal content -->
-    @if (auth()->user()->customer_status == 1)
+    @if (auth()->check() && auth()->user()->customer_status == 1)
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -402,7 +404,7 @@ class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 
                 </button>
             </form>
         </div>
-    @elseif (auth()->user()->customer_status == 0)
+    @elseif (auth()->check() && auth()->user()->customer_status == 0)
         <div class="flex flex-col items-center justify-center w-full border rounded p-5 bg-white">
             <p class="text-center mb-2">Your account is pending approval. Please check your email for the approval status</p>
         </div>
@@ -535,5 +537,92 @@ $(document).ready(function() {
         return false;
     });
 });
+</script>
+
+<script>
+    const emailInput = document.getElementById('customer_email');
+    const resultDiv = document.getElementById('result');
+    const submitButton = document.getElementById('submitIntentButton');
+
+    // Debounce function to delay API calls
+    const debounce = (func, delay) => {
+        let timeout;
+        return (...args) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func(...args), delay);
+        };
+    };
+
+    // Fetch API call to Abstract Email Validation API
+    const fetchEmailValidation = async (email) => {
+        const apiKey = "375dea896e9e497fbdba0f85f182761a"; // Replace with your actual Abstract API key
+        const apiUrl = `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(email)}`;
+
+        try {
+            const response = await fetch(apiUrl, { method: 'GET' });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data from the email validation API.');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    };
+
+    // Display the result and enable/disable button based on validation
+    const handleValidationResult = (response) => {
+        if (!response) {
+            resultDiv.innerHTML = `<span class="text-red-500">Unable to check email. Please try again later.</span>`;
+            submitButton.disabled = true;
+            submitButton.classList.add('bg-gray-400', 'hover:bg-gray-400');
+            submitButton.classList.remove('bg-red-800', 'hover:bg-red-700');
+            return;
+        }
+
+        if (response.deliverability === "DELIVERABLE") {
+            resultDiv.innerHTML = `<span class="text-green-500">Email exists and is deliverable.</span>`;
+            submitButton.disabled = false; // Enable the button
+            submitButton.classList.remove('bg-gray-400', 'hover:bg-gray-400');
+            submitButton.classList.add('bg-red-800', 'hover:bg-red-700');
+        } else if (response.deliverability === "UNDELIVERABLE") {
+            resultDiv.innerHTML = `<span class="text-red-500">Email does not exist or is undeliverable.</span>`;
+            submitButton.disabled = true; // Disable the button
+            submitButton.classList.add('bg-gray-400', 'hover:bg-gray-400');
+            submitButton.classList.remove('bg-red-800', 'hover:bg-red-700');
+        } else {
+            resultDiv.innerHTML = `<span class="text-yellow-500">Unable to determine email validity.</span>`;
+            submitButton.disabled = true; // Disable the button
+            submitButton.classList.add('bg-gray-400', 'hover:bg-gray-400');
+            submitButton.classList.remove('bg-red-800', 'hover:bg-red-700');
+        }
+    };
+
+    // Event listener for the email input
+    emailInput.addEventListener('input', debounce(async () => {
+        const email = emailInput.value.trim();
+
+        // Validate input is a proper email format
+        if (email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            resultDiv.innerHTML = `<span class="text-blue-500">Validating email...</span>`;
+            const response = await fetchEmailValidation(email);
+            handleValidationResult(response);
+        } else if (email) {
+            resultDiv.innerHTML = `<span class="text-red-500">Invalid email format.</span>`;
+            submitButton.disabled = true; // Disable the button for invalid format
+        } else {
+            resultDiv.innerHTML = '';
+            submitButton.disabled = true; // Disable the button if input is empty
+        }
+    }, 500)); // Debounce delay of 500ms
+
+    const reqpriceInput = document.getElementById('reqprice');
+
+    // Prevent negative numbers
+    reqpriceInput.addEventListener('input', () => {
+        if (reqpriceInput.value < 0) {
+            reqpriceInput.value = ''; // Clear the input if negative
+        }
+    });
 </script>
 @stop

@@ -188,7 +188,7 @@
                             class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login
                             here</a>
                     </p>
-                    <x-turnstile />
+                    {{-- <x-turnstile /> --}}
                 </form>
         </div>
     </div>
@@ -217,7 +217,7 @@
 
     // Fetch API call to Abstract Email Validation API
     const fetchEmailValidation = async (email) => {
-      const apiKey = "7c3436b1a01b44bb8bcc7a5ae730cf19"; // Replace with your actual Abstract API key
+      const apiKey = "375dea896e9e497fbdba0f85f182761a"; // Replace with your actual Abstract API key
       const apiUrl = `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(email)}`;
 
       try {
