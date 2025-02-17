@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 
-Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->middleware('verified');
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index']);
 
 Route::get('/mail', function () {
     return view('mails.outbid');

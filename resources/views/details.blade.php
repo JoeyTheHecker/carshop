@@ -112,7 +112,7 @@
             <div class="flex justify-between items-center mb-4">
                 <!-- Mileage -->
                 <div class="flex items-center space-x-2">
-                    <div class="p-4 rounded-md"><img class="h-12" src="images/mileage.png" alt=""></div>
+                    <div class="p-4 rounded-md"><img class="h-12" src="{{ URL::asset('images/mileage.png') }}" alt=""></div>
                     <div>
                         <h2 class="font-bold">Mileage</h2>
 
@@ -121,7 +121,7 @@
                 </div>
                 <!-- Transmission -->
                 <div class="flex items-center space-x-2">
-                    <div class="p-4 rounded-md"><img class="h-12" src="images/transmission.png" alt=""></div>
+                    <div class="p-4 rounded-md"><img class="h-12" src="{{ URL::asset('images/transmission.png') }}" alt=""></div>
                     <div>
                         <h2 class="font-bold">Transmission</h2>
                         <p>{{ $data->transmission }}</p>
@@ -129,7 +129,7 @@
                 </div>
                 <!-- Fuel Type -->
                 <div class="flex items-center space-x-2">
-                    <div class="p-4 rounded-md"><img class="h-12" src="images/fuel-pump.png" alt=""></div>
+                    <div class="p-4 rounded-md"><img class="h-12" src="{{ URL::asset('images/fuel-pump.png') }}" alt=""></div>
                     <div>
                         <h2 class="font-bold">Fuel Type</h2>
                         <p>{{ $data->fuel_type }}</p>
@@ -161,6 +161,14 @@
                         <label class="flex items-center space-x-2">
                             <span class="font-semibold">Year Model:</span>
                             <span>{{ $data->year_model }}</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <span class="font-semibold">Latest Condition:</span>
+                            <span>{{ $data->latest_condition }}</span>
+                        </label>
+                        <label class="flex items-center space-x-2">
+                            <span class="font-semibold">Descriptions:</span>
+                            <span>{{ $data->descriptions }}</span>
                         </label>
                     </div>
                 </div>

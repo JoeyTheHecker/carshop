@@ -113,7 +113,7 @@
             <p style="text-align:center;">{{$data['remaining_time']}}</p>
             <div >
                 <div>
-                    <a class="button" style="font: bold" href="http://192.168.100.27:8000/product/details/{{$data['product_id']}}">Place new bid</a>
+                    <a class="button" style="font: bold" href="http://192.168.14.192:8000/product/details/{{$data['product_id']}}">Place new bid</a>
                 </div>
             </div>
         </div>

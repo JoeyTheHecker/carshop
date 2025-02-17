@@ -117,7 +117,7 @@
 
             <h3>Next Steps:</h3>
             <ul>
-                <li><strong>Login:</strong> Visit <a href="http://192.168.100.27:8000/login">https://toyototacloban.com.ph/login</a> to access your account.</li>
+                <li><strong>Login:</strong> Visit <a href="http://192.168.14.192:8000/login">https://toyototacloban.com.ph/login</a> to access your account.</li>
                 <li><strong>Explore:</strong> Start exploring your account and begin bidding on vehicles right away.</li>
             </ul>
         </div>
